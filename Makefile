@@ -1,5 +1,5 @@
 install:
-  @make back-ci && make front-ci
+  make back-ci && make front-ci
 
 back-ci:
   npm install
