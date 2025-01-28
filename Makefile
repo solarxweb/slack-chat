@@ -1,11 +1,11 @@
 install: back-ci front-ci
-  make start
+  	make start
 
 back-ci:
-  npm install
+  	npm install
 
 front-ci:
-  cd frontend & npm install
+  	cd frontend & npm install
 
 start:
-  npm run start
+  	npm run start

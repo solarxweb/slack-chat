@@ -6,19 +6,8 @@
   "scripts": {
     "start": "concurrently \"npm run start-backend\" \"npm run start-frontend\"",
     "build": "npm run build --prefix frontend",
-    "start-backend": "start-server -s ./frontend/dist",
+    "start-backend": "npx start-server -s ./frontend/dist",
     "start-frontend": "cd frontend && npm run dev"
-  },
-  "bake": {
-    "description": "Scaffold a basic ES6 setup",
-    "scripts": {
-      "start": "echo Starting generation of default template",
-      "prestart": "echo prestart",
-      "poststart": "echo poststart",
-      "install": "npm install --loglevel warn --cache-min Infinity",
-      "preinstall": "echo Installing dependencies ...",
-      "postinstall": "npm ls --depth 0"
-    }
   },
   "keywords": [
     "chat",

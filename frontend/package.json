@@ -30,17 +30,6 @@
     "globals": "^15.14.0",
     "vite": "^5.4.10"
   },
-  "bake": {
-    "description": "Scaffold a basic ES6 setup",
-    "scripts": {
-      "start": "echo Starting generation of default template",
-      "prestart": "echo prestart",
-      "poststart": "echo poststart",
-      "install": "npm install --loglevel warn --cache-min Infinity",
-      "preinstall": "echo Installing dependencies ...",
-      "postinstall": "npm ls --depth 0"
-    }
-  },
   "private": true,
   "type": "module",
   "proxy": "http://localhost:5001/",
