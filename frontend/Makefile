@@ -1,4 +1,7 @@
 install:
+	npm ci
+
+build:
 	npm install
 
 start:

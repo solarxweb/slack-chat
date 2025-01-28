@@ -4,10 +4,8 @@
   "description": "diploma thesis, chat slack",
   "main": "index.js",
   "scripts": {
-    "start": "concurrently \"npm run start-backend\" \"npm run start-frontend\"",
-    "build": "npm run build --prefix frontend",
-    "start-backend": "npx start-server -s ./frontend/dist",
-    "start-frontend": "cd frontend && npm run dev"
+    "start": "start-server -s ./frontend/dist",
+    "build": "npm run build --prefix frontend"
   },
   "keywords": [
     "chat",
