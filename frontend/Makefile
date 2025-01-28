@@ -1,7 +1,5 @@
-.PHONY: install start
-
 install:
-  npm install
+	npm install
 
 start:
-  npm run dev
+	npm run dev
