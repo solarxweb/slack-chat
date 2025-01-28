@@ -1,8 +1,8 @@
 {
   "name": "vite-project",
-  "private": true,
   "version": "0.0.0",
-  "type": "module",
+  "description": "",
+  "main": "main.js",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -10,20 +10,59 @@
     "lint": "eslint .",
     "preview": "vite preview"
   },
-  "dependencies": {
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
-  },
   "devDependencies": {
-    "@eslint/js": "^9.13.0",
+    "babel-cli": "^6.9.0",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-transform-regenerator": "^6.9.0",
+    "babel-preset-es2015": "^6.9.0",
+    "bake-cli": "^0.1.6",
+    "eslint": "^9.19.0",
+    "eslint-config-standard": "^5.3.1",
+    "eslint-plugin-promise": "^1.1.0",
+    "eslint-plugin-standard": "^1.3.2",
+    "mocha": "^2.5.2",
+    "standard-version": "^2.2.1",
+    "watchd": "github:mklabs/watchd",
+    "@eslint/js": "^9.19.0",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "@vitejs/plugin-react": "^4.3.3",
-    "eslint": "^9.13.0",
-    "eslint-plugin-react": "^7.37.2",
-    "eslint-plugin-react-hooks": "^5.0.0",
+    "eslint-plugin-react": "^7.37.4",
+    "eslint-plugin-react-hooks": "^5.1.0",
     "eslint-plugin-react-refresh": "^0.4.14",
-    "globals": "^15.11.0",
+    "globals": "^15.14.0",
     "vite": "^5.4.10"
+  },
+  "bake": {
+    "description": "Scaffold a basic ES6 setup",
+    "scripts": {
+      "start": "echo Starting generation of default template",
+      "prestart": "echo prestart",
+      "poststart": "echo poststart",
+      "install": "npm install --loglevel warn --cache-min Infinity",
+      "preinstall": "echo Installing dependencies ...",
+      "postinstall": "npm ls --depth 0"
+    }
+  },
+  "private": true,
+  "type": "module",
+  "proxy": "http://localhost:5001/",
+  "dependencies": {
+    "@rollbar/react": "^0.12.0-beta",
+    "axios": "^1.7.8",
+    "bootstrap": "^5.3.3",
+    "formik": "^2.4.6",
+    "i18next": "^24.2.2",
+    "i18next-browser-languagedetector": "^8.0.2",
+    "leo-profanity": "^1.7.0",
+    "react": "^18.3.1",
+    "react-bootstrap": "^2.10.6",
+    "react-dom": "^18.3.1",
+    "react-i18next": "^15.4.0",
+    "react-router-dom": "^6.28.0",
+    "react-toastify": "^11.0.3",
+    "rollbar": "^2.26.4",
+    "socket.io-client": "^4.8.1",
+    "yup": "^1.4.0"
   }
 }
