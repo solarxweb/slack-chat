@@ -1,22 +1,11 @@
-.PHONY: install back-ci front-ci start
+.PHONY: install front-install start
 
-build:
-	npm run build
+front-install:
+	cd frontend && npm install
 
 install:
-  @make back-ci && make front-ci
-
-back-ci:
-  npm install
-
-front-ci:
-  cd frontend && npm install && npm run build
+	npm install
+	make front-install
 
 start:
-  make -j 2 start-backend start-frontend
-
-start-backend:
-  npm run start-backend
-
-start-frontend:
-  cd frontend && npm run dev
+	npm run start-backend & cd frontend && npm run dev
