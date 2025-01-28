@@ -1,0 +1,36 @@
+.oops-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  max-width: 420px;
+  background-color: aliceblue; /* Основной фон */
+  position: relative;
+  color: #8a8a8a;
+  border-radius: 5px;
+  padding: 15px;
+  overflow: hidden;
+  margin: 10px 15px;
+}
+
+.oops-block::before {
+  content: '';
+  position: absolute;
+  top: 25px;
+  left: -13px;
+  right: 0;
+  height: 50px; /* Высота полоски */
+  width: 120%;
+  background-image: linear-gradient(135deg, red 25%, white 25%, white 50%, red 50%, red 75%, white 75%, white 100%);
+  background-size: 45px 45px;
+  rotate: 2deg;
+
+  box-shadow: 10px 0px 20px rgb(93, 93, 93);
+}
+.oops-title {
+  margin-top: 25%;
+  font-weight: 200;
+  font-style: italic;
+  text-align: center;
+}

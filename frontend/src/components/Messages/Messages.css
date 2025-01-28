@@ -1,0 +1,51 @@
+.messages {
+	display: flex;
+	justify-content: flex-start;
+	flex-direction: column;
+	height: 100%;
+	/* min-width: 200px; */
+	overflow-x: hidden;
+	overflow-wrap: break-word;
+	word-wrap: break-word;
+	width: 100%;
+}
+
+.messages-header {
+  width: 100%;
+  height: 80px; /* Высота фиксирована */
+  background-color: rgba(157, 191, 195, 0.231);
+  padding: 10px 15px;
+  font-size: 16px;
+  font-family: 'Onest', sans-serif;
+  flex: 0 0 auto; /* Оставляем для статичной высоты */
+}
+
+.messages-box {
+  flex: 1;
+  background-color: #fff;
+  padding: 10px 15px;
+  overflow-y: auto; 
+
+  max-height: calc(100% - 80px);
+}
+
+.messages-textblock {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  flex: 0 0 auto; /* Убедитесь, что текстблок занимает только необходимую высоту */
+  padding: 20px 15px 0; /* Корректируем отступы */
+}
+
+.messages-textblock input {
+  width: 100%; /* Полная ширина текстового поля */
+  flex: 1; /* Позволяет полю занимать доступное пространство */
+  margin-right: 10px;
+  padding-left: 10px;
+}
+
+.messages-textblock input::placeholder {
+  margin-left: 15px;
+  font-style: italic;
+  font-size: 14px;
+}
