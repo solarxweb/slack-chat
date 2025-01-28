@@ -1,11 +1,11 @@
-.PHONY: install front-install start
-
-front-install:
-	cd frontend && npm install
+.PHONY: install build start
 
 install:
+	cd frontend && npm install
 	npm install
-	make front-install
+
+build:
+	npm run build
 
 start:
-	npm run start-backend & cd frontend && npm run dev
+	npm run start & npm run start-frontend

@@ -4,7 +4,8 @@
   "description": "diploma thesis, chat slack",
   "main": "index.js",
   "scripts": {
-    "start-backend": "npm run build --prefix ./frontend",
+    "build": "cd frontend && npm install && npm run build",
+    "start": "npx start-server -s ./frontend/dist",
     "start-frontend": "cd frontend && npm run dev"
   },
   "bake": {
