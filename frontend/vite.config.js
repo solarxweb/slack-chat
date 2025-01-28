@@ -9,6 +9,8 @@ export default defineConfig({
     proxy: {
       '/api': {
         target: 'http://localhost:5001',
+        changeOrigin: false,
+        secure: false,
       },
       '/socket.io': {
         target: 'ws://localhost:5001',
