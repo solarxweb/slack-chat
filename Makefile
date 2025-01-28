@@ -1,5 +1,8 @@
+back-ci:
+	npm install
+
 install:
-	cd frontend && npm ci
+	make back-ci && cd frontend & npm install
 
 dev:
 	cd frontend && npm run dev

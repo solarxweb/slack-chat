@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import { API_ROUTES } from '../../../api';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { useFormik } from 'formik';
@@ -46,7 +47,7 @@ const SwitchNameChannel = ({ show, onHide, id }) => {
     onSubmit: async (values, { setSubmitting }) => {
       const token = localStorage.getItem('token');
       
-      await axios.patch(`/api/v1/channels/${curId}`, values, {
+      await axios.patch(API_ROUTES.channels.channelById(curId), values, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

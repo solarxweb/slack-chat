@@ -1,4 +1,5 @@
 import './LoginForm.css';
+import { API_ROUTES } from '../../api';
 import * as yup from 'yup';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -30,7 +31,7 @@ export const LoginForm = () => {
     },
     validationSchema,
     onSubmit: (values) => {
-      axios.post('/api/v1/login', values)
+      axios.post(API_ROUTES.login(), values)
         .then(({ data: user }) => {
           localStorage.setItem('username', user.username);
           localStorage.setItem('token', user.token);

@@ -1,4 +1,5 @@
 import "./Messages.css";
+import { API_ROUTES } from "../../api";
 import axios from "axios";
 import { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -30,14 +31,14 @@ const Messages = () => {
   
   const loadMessages = async () => {
     try {
-      const { data } = await axios.get(`/api/v1/messages?channelId=${currentChannelId}`, {
+      const { data } = await axios.get(API_ROUTES.messages.listByChannel(currentChannelId), {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
       data.forEach(msg => dispatch(addMessage(msg)));
     } catch (error) {
-      console.error("Ошибка при загрузке сообщений:", error.response || error.message);
+      if (error.status === 500) noticeError();
     }
   };
 
@@ -91,8 +92,8 @@ const Messages = () => {
 
         setMessage('');
       } catch (error) {
+        if (error.status === 500) noticeError();
         console.warn(error.message);
-        noticeError();
       } finally {
         setLoading(false);
         inputRef.current.focus()

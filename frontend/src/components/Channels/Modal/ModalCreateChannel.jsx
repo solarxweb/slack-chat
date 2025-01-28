@@ -10,6 +10,7 @@ import { useTranslation } from 'react-i18next';
 import { useRef, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import leoProfanity from 'leo-profanity';
+import { API_ROUTES } from '../../../api';
 
 const ModalCreatingChannel = ({ show, onHide, createChannel, token }) => {
   const { t } = useTranslation();
@@ -43,7 +44,7 @@ const ModalCreatingChannel = ({ show, onHide, createChannel, token }) => {
 
       const channelNameToSend = isProfane ? '*'.repeat(values.name.length) : filteredName;
     
-      await axios.post('/api/v1/channels', { name: channelNameToSend }, {
+      await axios.post(API_ROUTES.channels.list(), { name: channelNameToSend }, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

@@ -6,6 +6,7 @@ import * as yup from 'yup';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import { setUserData } from '../../store/authSlice';
+import { API_ROUTES } from '../../api';
 
 const SignUp = () => {
   const redir = useNavigate();
@@ -35,7 +36,7 @@ const SignUp = () => {
     validationSchema,
     onSubmit: (values) => {
       try {
-        axios.post('/api/v1/signup', {
+        axios.post(API_ROUTES.signup(), {
           username: values.userLogin,
           userPassword: values.userPassword,
         })

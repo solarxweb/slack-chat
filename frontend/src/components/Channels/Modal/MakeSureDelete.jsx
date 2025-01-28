@@ -6,6 +6,7 @@ import { removeChannel, setCurrentChannel } from "../../../store/channelSlice";
 import axios from "axios";
 import socket from "../../../socket";
 import { toast } from 'react-toastify';
+import { API_ROUTES } from "../../../api";
 
 // eslint-disable-next-line react/prop-types
 const MakeSure = ({ show, onHide, id }) => {
@@ -18,7 +19,7 @@ const MakeSure = ({ show, onHide, id }) => {
 
   const handleRemoveChannel = async () => {
     try {
-      const response = await axios.delete(`/api/v1/channels/${id}`, {
+      const response = await axios.delete(API_ROUTES.channels.channelById(currentChannelId), {
         headers: {
           Authorization: `Bearer ${token}`,
         },

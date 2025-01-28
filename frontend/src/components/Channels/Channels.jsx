@@ -16,6 +16,7 @@ import socket from "../../socket.js";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { API_ROUTES } from "../../api/index.js";
 
 const Channels = () => {
   const { t } = useTranslation();
@@ -30,7 +31,7 @@ const Channels = () => {
   useEffect(() => {
     const fetchChannels = async () => {
       try {
-        const response = await axios.get('/api/v1/channels', {
+        const response = await axios.get(API_ROUTES.channels.list(), {
           headers: {
             Authorization: `Bearer ${token}`,
           }
