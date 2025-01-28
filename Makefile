@@ -1,5 +1,5 @@
-install:
-  make back-ci && make front-ci
+install: back-ci front-ci
+  make start
 
 back-ci:
   npm install
