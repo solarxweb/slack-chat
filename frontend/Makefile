@@ -5,4 +5,4 @@ build:
 	npm run build
 
 start:
-	npm run dev
+	npm start && npm run dev
