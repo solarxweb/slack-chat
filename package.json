@@ -4,9 +4,8 @@
   "description": "diploma thesis, chat slack",
   "main": "index.js",
   "scripts": {
-    "build": "npm run build --prefix frontend",
-    "start": "npx start-server -s ./frontend/dist",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start-backend": "npm run build --prefix ./frontend",
+    "start-frontend": "cd frontend && npm run dev"
   },
   "bake": {
     "description": "Scaffold a basic ES6 setup",

@@ -1,5 +1,7 @@
-install:
-	npm ci
+.PHONY: install start
 
-front-start:
-	npm run dev
+install:
+    npm install
+
+start:
+    npm run dev
