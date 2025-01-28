@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "start-server -s ./frontend/dist",
-    "build": "npm run build --prefix frontend"
+    "build": "npm run build --prefix frontend && start-server -s ./frontend/dist"
   },
   "keywords": [
     "chat",
