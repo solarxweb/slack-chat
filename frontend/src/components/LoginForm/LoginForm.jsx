@@ -1,4 +1,5 @@
 import './LoginForm.css';
+import { Spinner } from 'react-bootstrap';
 import { API_ROUTES } from '../../api';
 import * as yup from 'yup';
 import { useState } from 'react';
@@ -11,11 +12,10 @@ import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 
 export const LoginForm = () => {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
+  const noticeError = () => toast.warning(t('errNetwork'));
 
-  const noticeError = () => toast.warn(t('errNetwork'));
-
-  const navigate = useNavigate();
+  const redir = useNavigate();
   const dispatch = useDispatch();
   const [authError, setAuthError] = useState(false);
 
@@ -30,24 +30,23 @@ export const LoginForm = () => {
       password: '',
     },
     validationSchema,
-    onSubmit: (values) => {
-      axios.post(API_ROUTES.login(), values)
-        .then(({ data: user }) => {
-          localStorage.setItem('username', user.username);
-          localStorage.setItem('token', user.token);
-          setAuthError(false)
-          dispatch(setUserData(user));
-          navigate('/');
-        })
-        .catch((e) => {
-          if (e.status === 500) {
-            noticeError();
-          } else if (e.status === 401) {
-            setAuthError(true);
-          }
-          console.warn(e)
-        })
-    }
+    onSubmit: async (values) => {
+      setAuthError(false);
+      try {
+        const { data: user } = await axios.post(API_ROUTES.login(), values);
+        localStorage.setItem('username', user.username);
+        localStorage.setItem('token', user.token);
+        dispatch(setUserData(user));
+        formik.isValid ? redir('/') : setAuthError(true);
+      } catch (error) {
+        console.error('Login error:', error);
+        if (error.status === 401) {
+          setAuthError(true);
+        } else if (error.status === 500) {
+          noticeError();
+        }
+      }
+    },
   });
 
   return (
@@ -55,47 +54,61 @@ export const LoginForm = () => {
       <form onSubmit={formik.handleSubmit} className="auth-form">
         <div className="auth-fields">
           <div className="auth-title">
-            <h1>Войти</h1>
+            <h1>{t('enter')}</h1>
           </div>
-          <label htmlFor='username'>Ваше имя</label>
-          <input
-            required
-            className='input-field'
-            type="text"
-            name='username'
-            id='login_form-control'
-            value={formik.values.username}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-          />
-          {formik.touched.username && formik.errors.username ? (
-            <span style={{ color: 'red' }}>{formik.errors.username}</span>
-          ) : null}
+          <div className="form-floating mb-3">
+            {/* Поле имени пользователя */}
+            <input
+              placeholder={t('loginName')}
+              required
+              className={`input-field form-control ${formik.touched.username && formik.errors.username ? 'error' : ''}`}
+              type="text"
+              name="username"
+              value={formik.values.username}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+            />
+            <label className="label-form" htmlFor="username">{t('loginName')}</label>
+            {formik.touched.username && formik.errors.username && (
+              <span className="error-message">{formik.errors.username}</span>
+            )}
+          </div>
           
-          <label htmlFor='password'>Пароль</label>
-          <input
-            required
-            className='input-field'
-            type="password"
-            name='password'
-            id='password_form-control'
-            value={formik.values.password}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-          />
-          {formik.touched.password && formik.errors.password ? (
-            <span style={{ color: 'red' }}>{formik.errors.password}</span>
-          ) : null}
+            <div className="form-floating mb-3">
+              {/* Поле пароля */}
+              <input
+                placeholder={t('loginPassword')}
+                required
+                className={`input-field form-control ${formik.touched.password && formik.errors.password ? 'error' : ''}`}
+                type="password"
+                name="password"
+                value={formik.values.password}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+              />
+              <label className="label-form" htmlFor="password">{t('loginPassword')}</label>
+              {formik.touched.password && formik.errors.password && (
+                <span className="error-message">{formik.errors.password}</span>
+              )}
+            </div>
 
-          {authError && <span style={{ backgroundColor: 'red', padding: '5px', margin: '5px', color: 'white', fontSize: '14px', width: '270px'}}>{t('errLogin')}</span>}
+          {/* Общая ошибка авторизации */}
+          {authError && <div className="auth-error">{t('errLogin')}</div>}
 
+          <button type="submit" className="submit-btn" disabled={formik.isSubmitting}>
+            {formik.isSubmitting ? <Spinner style={{ width: '15px', height: '15px'}}/> : t('enter')}
+          </button>
         </div>
-        <div className="submit_btn-wrapper">
-          <button type="submit" className='submit-btn'>Войти</button>
+
+
+        <div className="auth-unregistred">
+          <p>
+            {t('noAccount')}{' '}
+            <a className="auth-unregistred__signup" href="/signup">
+              {t('signUpTitle')}
+            </a>
+          </p>
         </div>
-      <div className="auth-unregistred">
-        <p>Нет аккаунта? <a className='auth-unregistred__signup' href="/signup">Регистрация</a></p>
-      </div>
       </form>
     </div>
   );

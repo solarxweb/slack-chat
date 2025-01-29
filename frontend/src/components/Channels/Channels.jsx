@@ -96,7 +96,7 @@ const Channels = () => {
                 type="button"
                 onClick={() => handlePickChannel(channel.id)}
               >
-                # {channel.name}
+                <span className="me-1">#</span> {channel.name}
               </button>
               {channel.removable && <DropdownElement id={channel.id} />}
             </li>

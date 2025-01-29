@@ -1,10 +1,10 @@
 import { LoginForm } from './components/LoginForm/LoginForm.jsx';
-import { lazy } from 'react';
+// import { lazy } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Header from './components/Header/Header.jsx';
 import SignUp from './components/SignUp/SignUp.jsx';
 import { NotFound } from './components/NotFound/NotFound.jsx';
-const Channels = lazy(() => import('./components/Channels/Channels.jsx'));
+import Channels from './components/Channels/Channels.jsx';
 import store from './store/store.js';
 import { Provider as ReduxProvider } from 'react-redux';
 import { I18nextProvider } from 'react-i18next';
@@ -13,18 +13,16 @@ import './App.css';
 import { ToastContainer } from 'react-toastify';
 import { Provider, ErrorBoundary } from '@rollbar/react';
 
-const rollbarConfig = {
-  accessToken: 'd4eca5f6516a4e849da459ee439f9279',
-  captureUncaught: true,
-  captureUnhandledRejections: true,
-  environment: 'production',
-};
+// const rollbarConfig = {
+//   accessToken: 'd4eca5f6516a4e849da459ee439f9279',
+//   captureUncaught: true,
+//   captureUnhandledRejections: true,
+//   environment: 'production',
+// };
 
 
 function App() {
   return (
-    <Provider config={rollbarConfig}>
-      <ErrorBoundary>
         <BrowserRouter>
           <I18nextProvider i18n={i18nextInstance}>
             <ReduxProvider store={store}>
@@ -41,8 +39,6 @@ function App() {
             </ReduxProvider>
           </I18nextProvider>
         </BrowserRouter>
-      </ErrorBoundary>
-    </Provider>
   );
 }
 

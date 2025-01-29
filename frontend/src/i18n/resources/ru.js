@@ -2,10 +2,11 @@ export default {
   translation: {
     title: 'Hexlet Chat',
     enter: 'Войти',
+    noAccount: 'Нет аккаунта?',
     logout: 'Выйти',
     loginName: 'Ваш ник',
     loginPassword: 'Пароль',
-    signUpHeader: 'Регистрация',
+    signUpTitle: 'Регистрация',
     signUpUsername: 'Имя пользователя',
     signUpPassword: 'Пароль',
     signUpConfirmPassword: 'Подтвердите пароль',

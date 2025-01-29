@@ -104,7 +104,7 @@ const Messages = () => {
   return (
     <div className="chat-messages messages">
       <div className="messages-header header">
-        <h3 className="messages-header__title">{channelName}</h3>
+        <b className="messages-header__title"># {channelName}</b>
         <div className="messages-header__counter">{currentMessages.length} сообщений</div>
       </div>
       <div className="messages-box">
@@ -125,7 +125,7 @@ const Messages = () => {
           placeholder="Введите сообщение..."
           value={message}
           onChange={handleChange}
-          aria-label="Введите сообщение"
+          aria-label="Новое сообщение"
         />
         <button
           type="button"

@@ -9,11 +9,9 @@ const Header = () => {
   const redir = useNavigate()
   const link = (token) ? '/' : '/login'
   const logout = () => {
-    if (token) {
-      localStorage.clear();
-      clearUserData();
-      redir('/login');
-    }
+    localStorage.clear();
+    clearUserData();
+    redir('/login');
   }
   // Вместо title, используем строку как ключ
   return (

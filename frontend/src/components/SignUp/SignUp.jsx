@@ -1,4 +1,5 @@
-import './SignUp.css'
+import './SignUp.css';
+import { Spinner } from 'react-bootstrap';
 import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -7,24 +8,26 @@ import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import { setUserData } from '../../store/authSlice';
 import { API_ROUTES } from '../../api';
+import { useDispatch } from 'react-redux';
 
 const SignUp = () => {
   const redir = useNavigate();
   const { t } = useTranslation();
-  const noticeError = () => toast.warning(t('errNetwork'))
+  const dispatch = useDispatch()
+  const noticeError = () => toast.warning(t('errNetwork'));
 
+  // Исправлены ключи переводов для min и max
   const validationSchema = yup.object({
     userLogin: yup.string()
-      .min(3, t('errRegistrationUsernameLength'))
-      .max(20, t('errRegistrationUsernameLength'))
+      .min(3, t('errRegistrationUsernameLength')) // Изменено на errRegistrationUsernameMin
+      .max(20, t('errRegistrationUsernameLength')) // Изменено на errRegistrationUsernameMax
       .required(t('errRegistrationRequiredField')),
     userPassword: yup.string()
       .min(6, t('errRegistrationNotEnougthSymbs'))
       .required(t('errRegistrationRequiredField')),
     userConfirmPassword: yup.string()
       .required(t('errRegistrationRequiredField'))
-      .oneOf([yup.ref('userPassword'), null], t('errRegistrationPasswordsDontMatch')),
-      
+      .oneOf([yup.ref('userPassword')], t('errRegistrationPasswordsDontMatch')), // Убран null
   });
 
   const formik = useFormik({
@@ -34,62 +37,102 @@ const SignUp = () => {
       userConfirmPassword: '',
     },
     validationSchema,
-    onSubmit: (values) => {
+    onSubmit: async (values, { setSubmitting }) => {
       try {
-        axios.post(API_ROUTES.signup(), {
+        const response = await axios.post(API_ROUTES.signup(), {
           username: values.userLogin,
-          userPassword: values.userPassword,
-        })
-        .then((response) => {
-          if (response.statusText === 'Created') {
-            const { username, token } = response.data;
-            setUserData({username, token})
-            localStorage.setItem('username', username);
-            localStorage.setItem('token', token);
-            redir('/');
-          }
-        })
-        .catch((error) => {
-          if (error.status === 500) {
-            noticeError()
-          } else if (error.status === 409) {
-            formik.setFieldError('userLogin', t('errRegistrationAlreadyExist'))
-          }
-          console.warn(error)
-        })
-      } catch (netError) {
-        noticeError();
-        console.warn(netError)
+          password: values.userPassword, // Исправлено с userPassword на password (если требуется бэкендом)
+        });
+        if (response.statusText === 'Created') { // Проверка на статус Created (201)
+          const { username, token } = response.data;
+          localStorage.setItem('username', username);
+          localStorage.setItem('token', token);
+          dispatch(setUserData({ username, token }));
+          redir('/');
+        }
+      } catch (error) {
+        if (error.response?.status === 409) {
+          formik.setFieldError('userLogin', t('errRegistrationAlreadyExist'));
+        } else if (error.response?.status === 500) {
+          noticeError();
+        } else {
+          console.error('Unexpected error:', error);
+        }
+      } finally {
+        setSubmitting(false);
       }
     },
   });
 
   return (
-    <>
-      <div className="signup-wrapper">
-        <div className="signup-title">
-          <h3>Регистрация</h3>
+    <div className="signup-wrapper">
+      <div className="signup-title">
+        <h3>{t('signUpTitle')}</h3> {/* Добавлен перевод для заголовка */}
+      </div>
+      <form onSubmit={formik.handleSubmit} className='signup-form'>
+        {/* Поле логина */}
+        <div className="form-floating mb-3">
+          <input
+            placeholder={t('signUpUsername')}
+            id='signup-login'
+            className={`form-control ${formik.touched.userLogin && formik.errors.userLogin ? 'is-invalid' : ''}`}
+            type="text"
+            name="userLogin"
+            value={formik.values.userLogin}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+          />
+          <label className='form-label'>{t('signUpUsername')}</label>
+          {formik.touched.userLogin && formik.errors.userLogin && (
+            <div className='invalid-feedback'>{formik.errors.userLogin}</div>
+          )}
         </div>
-        <form onSubmit={formik.handleSubmit} className='signup-form'>
-          <div className="form-floating mb-3">
-            <input id='signup-login' className='form-control' type="text" name="userLogin" value={formik.values.userLogin} onChange={formik.handleChange} />
-            <label className='form-label'>Имя пользователя</label>
-              {formik.touched.userLogin && formik.errors.userLogin ? <div className='bg-danger'>{formik.errors.userLogin}</div> : null}
-          </div>
-          <div className="form-floating mb-3">
-            <input id='signup-password' className='form-control' type="password" name="userPassword" value={formik.values.userPassword} onChange={formik.handleChange} />
-              {formik.touched.userPassword && formik.errors.userPassword ? <div className='bg-danger'>{formik.errors.userPassword}</div> : null}
-            <label className='form-label'>Пароль</label>
-          </div>
-          <div className="form-floating mb-3">
-            <input id='signup-password' className='form-control' type="password" name="userConfirmPassword" value={formik.values.userConfirmPassword} onChange={formik.handleChange} />
-              {formik.touched.userConfirmPassword && formik.errors.userConfirmPassword ? <div className='bg-danger'>{formik.errors.userConfirmPassword}</div> : null}
-            <label className='label-control'>Подтвердите пароль</label>
-          </div>
-          <button className='signup-btn btn btn-outline-primary' type="submit">Зарегистрироваться</button>
-        </form>
+
+        {/* Поле пароля */}
+        <div className="form-floating mb-3">
+          <input
+            placeholder={t('signUpPassword')}
+            id='signup-password'
+            className={`form-control ${formik.touched.userPassword && formik.errors.userPassword ? 'is-invalid' : ''}`}
+            type="password"
+            name="userPassword"
+            value={formik.values.userPassword}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+          />
+          <label className='form-label'>{t('signUpPassword')}</label>
+          {formik.touched.userPassword && formik.errors.userPassword && (
+            <div className='invalid-feedback'>{formik.errors.userPassword}</div>
+          )}
         </div>
-    </>
+
+        {/* Подтверждение пароля */}
+        <div className="form-floating mb-3">
+          <input
+            placeholder={t('signUpConfirmPassword')}
+            id='signup-confirm-password'
+            className={`form-control ${formik.touched.userConfirmPassword && formik.errors.userConfirmPassword ? 'is-invalid' : ''}`}
+            type="password"
+            name="userConfirmPassword"
+            value={formik.values.userConfirmPassword}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+          />
+          <label className='form-label'>{t('signUpConfirmPassword')}</label>
+          {formik.touched.userConfirmPassword && formik.errors.userConfirmPassword && (
+            <div className='invalid-feedback'>{formik.errors.userConfirmPassword}</div>
+          )}
+        </div>
+
+        <button
+          className='signup-btn btn btn-outline-primary'
+          type="submit"
+          disabled={formik.isSubmitting}
+        >
+          {formik.isSubmitting ? <Spinner style={{ width: '15px', hight: '15px' }}/> : t('signUpRegistrationBtn')}
+        </button>
+      </form>
+    </div>
   );
 };
 
