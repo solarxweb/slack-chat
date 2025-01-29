@@ -29,6 +29,7 @@ const Channels = () => {
   const token = localStorage.getItem('token');
 
   useEffect(() => {
+    if (!token) redir('/login');
     const fetchChannels = async () => {
       try {
         const response = await axios.get(API_ROUTES.channels.list(), {
