@@ -4,9 +4,10 @@
   "description": "",
   "scripts": {
     "dev": "vite",
-    "start": "npx start-server -s ./dist",
     "build": "vite build",
-    "serve": "vite preview"
+    "start": "npx start-server -s ./dist",
+    "lint": "eslint .",
+    "preview": "vite preview"
   },
   "devDependencies": {
     "@eslint/js": "^9.19.0",
