@@ -1,17 +1,18 @@
 install:
-	npm ci && make -C frontend install
-
-build:
-	npm run build
-
-start: 
-	concurrently "make start-frontend" "make start-backend"
-
-start-backend:
-	npm run start
+	npm ci
 
 start-frontend:
-	npm run dev --prefix frontend
+	make -C frontend start
 
-lint:
-	make -C frontend lint
+start-backend:
+	npm start
+
+start:
+	make start-backend
+
+local-start:
+	make start-backend & make start-frontend
+
+build:
+	rm frontend/build -rf
+	npm run build
