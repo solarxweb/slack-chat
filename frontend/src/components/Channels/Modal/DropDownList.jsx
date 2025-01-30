@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+/* eslint-disable jsx-a11y/anchor-is-valid*/
 import { useState, useRef, useEffect } from 'react';
 import MakeSure from './MakeSureDelete.jsx';
 import SwitchNameChannel from './ChangeNameChannel.jsx';
@@ -80,7 +81,7 @@ const DropdownElement = ({ id }) => {
       <MakeSure
         show={isConfirmationOpen}
         onHide={() => {
-          console.log("Закрываюсь");
+          console.log('Закрываюсь');
           setIsConfirmationOpen(false);
         }}
         id={id}

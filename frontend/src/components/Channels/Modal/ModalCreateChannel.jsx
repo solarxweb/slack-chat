@@ -12,7 +12,9 @@ import { toast } from 'react-toastify';
 import leoProfanity from 'leo-profanity';
 import API_ROUTES from '../../../api';
 
-const ModalCreatingChannel = ({ show, onHide, createChannel, token }) => {
+const ModalCreatingChannel = ({
+  show, onHide, createChannel, token 
+}) => {
   const { t } = useTranslation();
   const notifySuccess = () => toast.success(t('noticeChannelCreated'));
   const notifyError = () => toast.warning(t('errCreateChannelNetwork'));
@@ -38,7 +40,7 @@ const ModalCreatingChannel = ({ show, onHide, createChannel, token }) => {
     initialValues: {
       name: '',
     },
-    validationSchema: validationSchema,
+    validationSchema,
     onSubmit: async (values, { setSubmitting }) => {
       if (!token) return;
       const filteredName = leoProfanity.clean(values.name);
@@ -56,7 +58,7 @@ const ModalCreatingChannel = ({ show, onHide, createChannel, token }) => {
             headers: {
               Authorization: `Bearer ${token}`,
             },
-          }
+          },
         )
         .then((response) => {
           createChannel(response.data);
@@ -94,7 +96,7 @@ const ModalCreatingChannel = ({ show, onHide, createChannel, token }) => {
       </Modal.Header>
       <Modal.Body>
         <form className="mb-3" onSubmit={formik.handleSubmit}>
-          <label className="visually-hidden" htmlFor="name">
+          <label className="visually-hidden" htmlFor="name" id="name">
             Имя канала
           </label>
           <input

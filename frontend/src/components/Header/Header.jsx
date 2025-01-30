@@ -16,7 +16,6 @@ const Header = () => {
   };
   // Вместо title, используем строку как ключ
   return (
-    <>
       <div className="header__container">
         <div className="header__title">
           <a href={link} className="title">
@@ -31,7 +30,6 @@ const Header = () => {
           ) : null}
         </div>
       </div>
-    </>
   );
 };
 

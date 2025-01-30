@@ -20,8 +20,7 @@ import LoginForm from "./components/LoginForm/LoginForm.jsx";
 //   environment: "production",
 // };
 
-const App = () => {
-  return (
+const App = () => (
     <BrowserRouter>
       <I18nextProvider i18n={i18nextInstance}>
         <ReduxProvider store={store}>
@@ -38,7 +37,6 @@ const App = () => {
         </ReduxProvider>
       </I18nextProvider>
     </BrowserRouter>
-  );
-}
+);
 
 export default App;

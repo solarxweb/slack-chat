@@ -79,8 +79,8 @@ const SignUp = () => {
             id="signup-login"
             className={`form-control ${
               formik.touched.userLogin && formik.errors.userLogin
-                ? "is-invalid"
-                : ""
+                ? 'is-invalid'
+                : ''
             }`}
             type="text"
             name="userLogin"
@@ -141,12 +141,14 @@ const SignUp = () => {
           <label htmlFor="signup-confirm-password" className="form-label">
             {t('signUpConfirmPassword')}
           </label>
-          {formik.touched.userConfirmPassword &&
-            formik.errors.userConfirmPassword && (
+          {formik.touched.userConfirmPassword 
+          &&
+            formik.errors.userConfirmPassword
+            && (
               <div className="invalid-feedback">
-              {formik.errors.userConfirmPassword}
+                {formik.errors.userConfirmPassword}
               </div>
-            )}
+          )}
         </div>
 
         <button

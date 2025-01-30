@@ -5,16 +5,16 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import './Channels.css';
 import cn from 'classnames';
+import { useDispatch, useSelector } from 'react-redux';
 import Messages from '../Messages/Messages';
 import ModalCreatingChannel from './Modal/ModalCreateChannel.jsx';
 import DropdownElement from './Modal/DropDownList.jsx';
-import { useDispatch, useSelector } from 'react-redux';
 import {
   addChannel,
   addChannels,
   setCurrentChannel,
   removeChannel,
-  selectors as channelSelectors
+  selectors as channelSelectors,
 } from '../../store/channelSlice.js';
 import socket from '../../socket.js';
 import API_ROUTES from '../../api/index.js';
@@ -87,8 +87,8 @@ const Channels = () => {
               width={20}
               height={20}
             >
-              <path d='M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4'></path>
-              <path d='M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z'></path>
+              <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"></path>
+              <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"></path>
             </svg>
             <span className="sr-only">+</span>
           </button>

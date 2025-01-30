@@ -1,7 +1,7 @@
 import './Messages.css';
 import axios from 'axios';
 import {
-  useEffect, useState, useRef, useMemo
+  useEffect, useState, useRef, useMemo,
 } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
@@ -23,11 +23,11 @@ const Messages = () => {
   const username = localStorage.getItem('username');
   const channelsState = useSelector((state) => state.channels);
   const currentChannelId = useSelector(
-    (state) => state.channels.currentChannel
+    (state) => state.channels.currentChannel,
   );
   const messages = useSelector(messageSelector.selectAll);
   const currentMessages = messages.filter(
-    (msg) => msg.channelId === currentChannelId
+    (msg) => msg.channelId === currentChannelId,
   );
 
   const inputRef = useRef(null);
@@ -61,7 +61,7 @@ const Messages = () => {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        }
+        },
       );
       data.forEach((msg) => dispatch(addMessage(msg)));
     } catch (error) {
@@ -142,7 +142,7 @@ const Messages = () => {
           <div key={msg.id} className="message">
             <b>
               {msg.username}
-              : 
+              :
             </b>
             {msg.body}
           </div>
