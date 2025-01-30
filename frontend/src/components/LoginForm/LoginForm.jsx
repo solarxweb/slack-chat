@@ -1,4 +1,4 @@
-{ /*
+{/*
   import './LoginForm.css';
 import { Spinner } from 'react-bootstrap';
 import { API_ROUTES } from '../../api';
@@ -114,7 +114,7 @@ export const LoginForm = () => {
     </div>
   );
 };
- */
+ */} 
 import './LoginForm.css';
 import { Spinner } from 'react-bootstrap';
 import { API_ROUTES } from '../../api';
