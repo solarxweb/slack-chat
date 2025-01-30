@@ -4,3 +4,6 @@
 # Slack project ``simplified``
 ## [Project on Render.com](https://slackchat-project.onrender.com/)
 
+
+Project represent himself as chat where you can..(31.01 дописать)
+
