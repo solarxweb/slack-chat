@@ -82,7 +82,7 @@ const SignUp = () => {
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
-          <label htmlFor='userLogin' className='form-label'>{t('signUpUsername')}</label>
+          <label htmlFor='signup-login' className='form-label'>{t('signUpUsername')}</label>
           {formik.touched.userLogin && formik.errors.userLogin && (
             <div className='invalid-feedback'>{formik.errors.userLogin}</div>
           )}
@@ -100,7 +100,7 @@ const SignUp = () => {
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
-          <label htmlFor='userPassword' className='form-label'>{t('signUpPassword')}</label>
+          <label htmlFor='signup-password' className='form-label'>{t('signUpPassword')}</label>
           {formik.touched.userPassword && formik.errors.userPassword && (
             <div className='invalid-feedback'>{formik.errors.userPassword}</div>
           )}
@@ -118,7 +118,7 @@ const SignUp = () => {
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
-          <label htmlFor='userConfirmPassword' className='form-label'>{t('signUpConfirmPassword')}</label>
+          <label htmlFor='signup-confirm-password' className='form-label'>{t('signUpConfirmPassword')}</label>
           {formik.touched.userConfirmPassword && formik.errors.userConfirmPassword && (
             <div className='invalid-feedback'>{formik.errors.userConfirmPassword}</div>
           )}
