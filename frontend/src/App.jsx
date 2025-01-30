@@ -1,9 +1,9 @@
-import { LoginForm } from "./components/LoginForm/LoginForm.jsx";
+import LoginForm from "./components/LoginForm/LoginForm.jsx";
 // import { lazy } from 'react';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Header from "./components/Header/Header.jsx";
 import SignUp from "./components/SignUp/SignUp.jsx";
-import { NotFound } from "./components/NotFound/NotFound.jsx";
+import NotFound from "./components/NotFound/NotFound.jsx";
 import Channels from "./components/Channels/Channels.jsx";
 import store from "./store/store.js";
 import { Provider as ReduxProvider } from "react-redux";
