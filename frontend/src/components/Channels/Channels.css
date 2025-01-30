@@ -51,9 +51,9 @@
   flex-direction: column;
   width: 100%;
   padding: 0;
-  overflow-y: auto; /* Изменено на auto для более гибкого поведения */
-  flex: 1; /* Позволяет элементу расти, занимая доступное пространство */
-  max-height: calc(100% - 80px); /* Устанавливаем максимальную высоту с учетом заголовка */
+  overflow-y: auto; 
+  flex: 1;
+  max-height: calc(100% - 50px);
 }
 
 .channels-list > li {
@@ -72,7 +72,7 @@
   align-items: center;
   width: 100%;
 
-  background-color: rgb(221, 235, 241);
+  /* background-color: rgb(221, 235, 241); */
 
   border: none;
 
@@ -88,7 +88,7 @@
 
 .dropdown-toggle {
   position: relative;
-  background-color: rgb(230, 238, 244) !important;
+  background-color: #6c757d !important;
   transition: background-color 150ms ease 75ms;
 }
 

@@ -71,7 +71,7 @@ const Messages = () => {
 
   const handleChange = (e) => setMessage(e.target.value);
 
-  const handleSendMessage = async (e) => {
+  const handleSendMessage = async () => {
     if (!message || loading) return;
 
     const cleanedMessage = leoProfanity.clean(message);

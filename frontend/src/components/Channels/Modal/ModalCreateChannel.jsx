@@ -21,13 +21,14 @@ const ModalCreatingChannel = ({ show, onHide, createChannel, token }) => {
   const inputRef = useRef(null);
 
   useEffect(() => {
-    leoProfanity.loadDictionary('ru'); // 'ru' / 'fr' / 'en' 
+    leoProfanity.loadDictionary('en')
+    // leoProfanity.loadDictionary('ru'); // 'ru' / 'fr' / 'en' 
   }, []);
 
   const validationSchema = yup.object().shape({
     name: yup.string()
-      .min(3, t('errCreateChannelNotEnougthSymb'))
-      .max(20, t('errCreateChannelExtraSymb'))
+      .min(3, t('errCreateChannelLength'))
+      .max(20, t('errCreateChannelLength'))
       .required(t('errCreateChannelEmpty'))
       .notOneOf(existingNames, t('errRenameChannelDouble'))
   });
@@ -98,7 +99,7 @@ const ModalCreatingChannel = ({ show, onHide, createChannel, token }) => {
         <Button variant="secondary" onClick={handleClose}>
           {t('close')}
         </Button>
-        <Button variant="primary" type="submit" onClick={formik.handleSubmit} disabled={formik.isSubmitting}>
+        <Button variant="primary" type="submit" onKeyDown={(e) => {if (e.key === 'Enter') formik.handleSubmit(e)}} onClick={formik.handleSubmit} disabled={formik.isSubmitting}>
           {t('submitCreateChannelBtn')}
         </Button>
       </Modal.Footer>

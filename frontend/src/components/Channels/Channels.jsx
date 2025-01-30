@@ -1,4 +1,5 @@
 import "./Channels.css";
+import cn from 'classnames';
 import Messages from "../Messages/Messages";
 import ModalCreatingChannel from "./Modal/ModalCreateChannel.jsx";
 import DropdownElement from "./Modal/DropDownList.jsx";
@@ -18,6 +19,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { API_ROUTES } from "../../api/index.js";
 
+
 const Channels = () => {
   const { t } = useTranslation();
   const redir = useNavigate();
@@ -25,7 +27,10 @@ const Channels = () => {
 
   const dispatch = useDispatch();
   const [show, setShow] = useState(false);
+  const [selectedChannelId, setSelectedChannelId] = useState('');
+  
   const channels = useSelector(channelSelectors.selectAll);
+  
   const token = localStorage.getItem('token');
 
   useEffect(() => {
@@ -57,6 +62,7 @@ const Channels = () => {
   });
 
   const handlePickChannel = (channelId) => {
+    setSelectedChannelId(channelId)
     dispatch(setCurrentChannel(channelId));
   };
 
@@ -65,6 +71,7 @@ const Channels = () => {
     handlePickChannel(newChannel.id);
     setShow(false);
   };
+
 
   return (
     <div className="chat-wrapper">
@@ -93,11 +100,11 @@ const Channels = () => {
           {channels.map((channel) => (
             <li className="channel-list__item item" key={channel.id}>
               <button
-                className="channel-btn"
+                className={cn('w-100 rounded-0 text-start text-truncate btn', {'btn-secondary': selectedChannelId === channel.id})}
                 type="button"
                 onClick={() => handlePickChannel(channel.id)}
               >
-                <span className="me-1">#</span> {channel.name}
+                <span className="me-1">#</span>{channel.name}
               </button>
               {channel.removable && <DropdownElement id={channel.id} />}
             </li>
