@@ -25,7 +25,7 @@ export default {
     errRegistrationUsernameLength: 'От 3 до 20 символов',
     errRegistrationAlreadyExist: 'Такой пользователь уже существует',
     errRegistrationRequiredField: 'Обязательное поле',
-    errRegistrationNotEnougthSymbs: 'Пароль должен сожержать минимум 6 символов',
+    errRegistrationNotEnougthSymbs: 'Не менее 6 символов',
     errRegistrationPasswordsDontMatch: 'Пароли должны совпадать',
     errLogin: 'Неверные имя пользователя или пароль',
     errCreateChannelEmpty: 'Имя не может быть пустым',
