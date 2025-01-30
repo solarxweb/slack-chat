@@ -3,7 +3,7 @@ export default {
     messageCounter: {
       one_message: '{{ count }} сообщение',
       few_messages: '{{ count }} сообщения',
-      many_messages: '{{ count }} сообщений'
+      many_messages: '{{ count }} сообщений',
     },
     title: 'Hexlet Chat',
     enter: 'Войти',

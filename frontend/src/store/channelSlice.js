@@ -44,8 +44,6 @@ export const {
 } = channelSlice.actions;
 
 // Экспорт селекторов
-export const selectors = channelsAdapter.getSelectors(
-  (state) => state.channels
-);
+export const selectors = channelsAdapter.getSelectors((state) => state.channels);
 
 export default channelSlice.reducer;
