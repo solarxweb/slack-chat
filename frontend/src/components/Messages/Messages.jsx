@@ -76,8 +76,6 @@ const Messages = () => {
 
     const cleanedMessage = leoProfanity.clean(message);
     const newMessage = { body: cleanedMessage, channelId: currentChannelId, username };
-    
-    if (e.key === 'Enter' || (e.type === 'click' && e.button === 0)) {
       try {
         setLoading(true);
         const { data } = await axios.post("/api/v1/messages", newMessage, {
@@ -98,7 +96,6 @@ const Messages = () => {
         setLoading(false);
         inputRef.current.focus()
       }
-    }
   };
 
   return (
@@ -125,6 +122,9 @@ const Messages = () => {
           placeholder="Введите сообщение..."
           value={message}
           onChange={handleChange}
+          onKeyDown={(e) => { 
+            if (e.key === 'Enter') handleSendMessage(e)
+          }}
           aria-label="Новое сообщение"
         />
         <button
