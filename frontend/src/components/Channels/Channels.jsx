@@ -17,7 +17,7 @@ import socket from "../../socket.js";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { API_ROUTES } from "../../api/index.js";
+import API_ROUTES from "../../api/index.js";
 
 const Channels = () => {
   const { t } = useTranslation();

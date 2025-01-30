@@ -10,7 +10,7 @@ import { useTranslation } from "react-i18next";
 import { useRef, useEffect } from "react";
 import { toast } from "react-toastify";
 import leoProfanity from "leo-profanity";
-import { API_ROUTES } from "../../../api";
+import API_ROUTES from "../../../api";
 
 const ModalCreatingChannel = ({ show, onHide, createChannel, token }) => {
   const { t } = useTranslation();

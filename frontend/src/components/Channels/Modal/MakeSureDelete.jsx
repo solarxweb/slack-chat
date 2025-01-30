@@ -1,22 +1,22 @@
-import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
-import { useDispatch, useSelector } from 'react-redux';
-import axios from 'axios';
-import { toast } from 'react-toastify';
-import { useTranslation } from 'react-i18next';
-import { removeChannel, setCurrentChannel } from '../../../store/channelSlice';
-import socket from '../../../socket';
-import { API_ROUTES } from '../../../api';
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
+import { removeChannel, setCurrentChannel } from "../../../store/channelSlice";
+import socket from "../../../socket";
+import API_ROUTES from "../../../api";
 
 // eslint-disable-next-line react/prop-types
 const MakeSure = ({ show, onHide, id }) => {
   const { t } = useTranslation();
-  const notifySuccess = () => toast.success(t('noticeChannelRemoved'));
-  const notifyError = () => toast.warning(t('errChannelRemoveNetwork'));
+  const notifySuccess = () => toast.success(t("noticeChannelRemoved"));
+  const notifyError = () => toast.warning(t("errChannelRemoveNetwork"));
   const dispatch = useDispatch();
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
   const currentChannelId = useSelector(
-    (state) => state.channels.currentChannel
+    (state) => state.channels.currentChannel,
   );
 
   const handleRemoveChannel = async () => {
@@ -30,12 +30,12 @@ const MakeSure = ({ show, onHide, id }) => {
         }
       );
 
-      if (response.statusText === 'OK') {
+      if (response.statusText === "OK") {
         dispatch(removeChannel({ id }));
         if (currentChannelId === id) {
-          dispatch(setCurrentChannel('1'));
+          dispatch(setCurrentChannel("1"));
         }
-        socket.on('removeChannel', { id });
+        socket.on("removeChannel", { id });
         notifySuccess();
       } else {
         console.error(`${t.errRemoveChannel} ${response.status}`);
@@ -53,10 +53,10 @@ const MakeSure = ({ show, onHide, id }) => {
       </Modal.Header>
       <Modal.Body>Вы уверены, что хотите удалить этот канал?</Modal.Body>
       <Modal.Footer>
-        <Button variant='secondary' onClick={onHide}>
+        <Button variant="secondary" onClick={onHide}>
           Отмена
         </Button>
-        <Button variant='danger' onClick={handleRemoveChannel}>
+        <Button variant="danger" onClick={handleRemoveChannel}>
           Удалить канал
         </Button>
       </Modal.Footer>
