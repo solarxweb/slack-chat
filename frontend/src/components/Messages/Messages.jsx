@@ -1,24 +1,26 @@
-import "./Messages.css";
-import axios from "axios";
-import { useEffect, useState, useRef, useMemo } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useTranslation } from "react-i18next";
-import { toast } from "react-toastify";
-import leoProfanity from "leo-profanity";
+import './Messages.css';
+import axios from 'axios';
+import {
+  useEffect, useState, useRef, useMemo
+} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
+import leoProfanity from 'leo-profanity';
 import {
   addMessage,
   selectors as messageSelector,
-} from "../../store/messagesSlice";
-import socket from "../../socket";
-import API_ROUTES from "../../api";
+} from '../../store/messagesSlice';
+import socket from '../../socket';
+import API_ROUTES from '../../api';
 
 const Messages = () => {
   const { t } = useTranslation();
-  const noticeError = () => toast.warning(t("errSendMessageNetwork"));
+  const noticeError = () => toast.warning(t('errSendMessageNetwork'));
   const dispatch = useDispatch();
 
-  const token = localStorage.getItem("token");
-  const username = localStorage.getItem("username");
+  const token = localStorage.getItem('token');
+  const username = localStorage.getItem('username');
   const channelsState = useSelector((state) => state.channels);
   const currentChannelId = useSelector(
     (state) => state.channels.currentChannel
@@ -29,11 +31,11 @@ const Messages = () => {
   );
 
   const inputRef = useRef(null);
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
 
   const channel = channelsState.entities[currentChannelId];
-  const channelName = channel ? channel.name : "Unknown Channel";
+  const channelName = channel ? channel.name : 'Unknown Channel';
 
   const messageCount = useMemo(() => {
     const count = currentMessages.length;
@@ -42,10 +44,10 @@ const Messages = () => {
       const lastTwo = n % 100;
       const lastOne = n % 10;
 
-      if (lastTwo >= 11 && lastTwo <= 14) return "many_messages";
-      if (lastOne === 1) return "one_message";
-      if (lastOne >= 2 && lastOne <= 4) return "few_messages";
-      return "many_messages";
+      if (lastTwo >= 11 && lastTwo <= 14) return 'many_messages';
+      if (lastOne === 1) return 'one_message';
+      if (lastOne >= 2 && lastOne <= 4) return 'few_messages';
+      return 'many_messages';
     };
 
     return t(`messageCounter.${getEndOfMessage(count)}`, { count });
@@ -68,7 +70,7 @@ const Messages = () => {
   };
 
   useEffect(() => {
-    leoProfanity.loadDictionary("ru");
+    leoProfanity.loadDictionary('ru');
   }, []);
 
   useEffect(() => {
@@ -86,10 +88,10 @@ const Messages = () => {
       dispatch(addMessage(payload));
     };
 
-    socket.on("newMessage", handleNewMessage);
+    socket.on('newMessage', handleNewMessage);
 
     return () => {
-      socket.off("newMessage", handleNewMessage);
+      socket.off('newMessage', handleNewMessage);
     };
   }, [dispatch]);
 
@@ -106,7 +108,7 @@ const Messages = () => {
     };
     try {
       setLoading(true);
-      const { data } = await axios.post("/api/v1/messages", newMessage, {
+      const { data } = await axios.post(API_ROUTES.messages.list(), newMessage, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -114,9 +116,9 @@ const Messages = () => {
 
       dispatch(addMessage(data));
 
-      socket.on("newMessage", data);
+      socket.on('newMessage', data);
 
-      setMessage("");
+      setMessage('');
     } catch (error) {
       if (error.status === 500) noticeError();
       console.warn(error.message);
@@ -156,7 +158,7 @@ const Messages = () => {
           value={message}
           onChange={handleChange}
           onKeyDown={(e) => {
-            if (e.key === "Enter") handleSendMessage(e);
+            if (e.key === 'Enter') handleSendMessage(e);
           }}
           aria-label="Новое сообщение"
         />
@@ -166,7 +168,7 @@ const Messages = () => {
           onClick={handleSendMessage}
           disabled={!message || loading}
         >
-          {loading ? "Отправка..." : t("send")}
+          {loading ? 'Отправка...' : t('send')}
         </button>
       </div>
     </div>

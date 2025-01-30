@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
-import { useState, useRef, useEffect } from "react";
-import MakeSure from "./MakeSureDelete.jsx";
-import SwitchNameChannel from "./ChangeNameChannel.jsx";
-import "bootstrap/dist/css/bootstrap.min.css";
+import { useState, useRef, useEffect } from 'react';
+import MakeSure from './MakeSureDelete.jsx';
+import SwitchNameChannel from './ChangeNameChannel.jsx';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const DropdownElement = ({ id }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -31,9 +31,9 @@ const DropdownElement = ({ id }) => {
       }
     };
 
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
 
@@ -50,7 +50,7 @@ const DropdownElement = ({ id }) => {
           <span className="visually-hidden">Управление каналом</span>
         </button>
         <ul
-          className={`dropdown-menu ${isOpen ? "show" : ""}`}
+          className={`dropdown-menu ${isOpen ? 'show' : ''}`}
           aria-labelledby={id}
         >
           <li>
@@ -90,7 +90,7 @@ const DropdownElement = ({ id }) => {
       <SwitchNameChannel
         show={isEditorOpen}
         onHide={() => {
-          console.log("Закрываю редактор");
+          console.log('Закрываю редактор');
           setIsEditorOpen(false);
         }}
         id={id}

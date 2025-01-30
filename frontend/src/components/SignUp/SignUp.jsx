@@ -1,42 +1,42 @@
-import "./SignUp.css";
-import { Spinner } from "react-bootstrap";
-import { useFormik } from "formik";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import * as yup from "yup";
-import { useTranslation } from "react-i18next";
-import { toast } from "react-toastify";
-import { useDispatch } from "react-redux";
-import { setUserData } from "../../store/authSlice";
-import API_ROUTES from "../../api";
+import './SignUp.css';
+import { Spinner } from 'react-bootstrap';
+import { useFormik } from 'formik';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import * as yup from 'yup';
+import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
+import { useDispatch } from 'react-redux';
+import { setUserData } from '../../store/authSlice';
+import API_ROUTES from '../../api';
 
 const SignUp = () => {
   const redir = useNavigate();
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const noticeError = () => toast.warning(t("errNetwork"));
+  const noticeError = () => toast.warning(t('errNetwork'));
 
   const validationSchema = yup.object({
     userLogin: yup
       .string()
-      .min(3, t("errRegistrationUsernameLength"))
-      .max(20, t("errRegistrationUsernameLength"))
-      .required(t("errRegistrationRequiredField")),
+      .min(3, t('errRegistrationUsernameLength'))
+      .max(20, t('errRegistrationUsernameLength'))
+      .required(t('errRegistrationRequiredField')),
     userPassword: yup
       .string()
-      .min(6, t("errRegistrationNotEnougthSymbs"))
-      .required(t("errRegistrationRequiredField")),
+      .min(6, t('errRegistrationNotEnougthSymbs'))
+      .required(t('errRegistrationRequiredField')),
     userConfirmPassword: yup
       .string()
-      .required(t("errRegistrationRequiredField"))
-      .oneOf([yup.ref("userPassword")], t("errRegistrationPasswordsDontMatch")),
+      .required(t('errRegistrationRequiredField'))
+      .oneOf([yup.ref('userPassword')], t('errRegistrationPasswordsDontMatch')),
   });
 
   const formik = useFormik({
     initialValues: {
-      userLogin: "",
-      userPassword: "",
-      userConfirmPassword: "",
+      userLogin: '',
+      userPassword: '',
+      userConfirmPassword: '',
     },
     validationSchema,
     onSubmit: async (values, { setSubmitting }) => {
@@ -45,20 +45,20 @@ const SignUp = () => {
           username: values.userLogin,
           password: values.userPassword,
         });
-        if (response.statusText === "Created") {
+        if (response.statusText === 'Created') {
           const { username, token } = response.data;
-          localStorage.setItem("username", username);
-          localStorage.setItem("token", token);
+          localStorage.setItem('username', username);
+          localStorage.setItem('token', token);
           dispatch(setUserData({ username, token }));
-          redir("/");
+          redir('/');
         }
       } catch (error) {
         if (error.response?.status === 409) {
-          formik.setFieldError("userLogin", t("errRegistrationAlreadyExist"));
+          formik.setFieldError('userLogin', t('errRegistrationAlreadyExist'));
         } else if (error.response?.status === 500) {
           noticeError();
         } else {
-          console.error("Unexpected error:", error);
+          console.error('Unexpected error:', error);
         }
       } finally {
         setSubmitting(false);
@@ -69,13 +69,13 @@ const SignUp = () => {
   return (
     <div className="signup-wrapper">
       <div className="signup-title">
-        <h3>{t("signUpTitle")}</h3>
+        <h3>{t('signUpTitle')}</h3>
       </div>
       <form onSubmit={formik.handleSubmit} className="signup-form">
         {/* Поле логина */}
         <div className="form-floating mb-3">
           <input
-            placeholder={t("signUpUsername")}
+            placeholder={t('signUpUsername')}
             id="signup-login"
             className={`form-control ${
               formik.touched.userLogin && formik.errors.userLogin
@@ -89,7 +89,7 @@ const SignUp = () => {
             onBlur={formik.handleBlur}
           />
           <label htmlFor="signup-login" className="form-label">
-            {t("signUpUsername")}
+            {t('signUpUsername')}
           </label>
           {formik.touched.userLogin && formik.errors.userLogin && (
             <div className="invalid-feedback">{formik.errors.userLogin}</div>
@@ -99,12 +99,12 @@ const SignUp = () => {
         {/* Поле пароля */}
         <div className="form-floating mb-3">
           <input
-            placeholder={t("signUpPassword")}
+            placeholder={t('signUpPassword')}
             id="signup-password"
             className={`form-control ${
               formik.touched.userPassword && formik.errors.userPassword
-                ? "is-invalid"
-                : ""
+                ? 'is-invalid'
+                : ''
             }`}
             type="password"
             name="userPassword"
@@ -113,7 +113,7 @@ const SignUp = () => {
             onBlur={formik.handleBlur}
           />
           <label htmlFor="signup-password" className="form-label">
-            {t("signUpPassword")}
+            {t('signUpPassword')}
           </label>
           {formik.touched.userPassword && formik.errors.userPassword 
           && (
@@ -124,14 +124,13 @@ const SignUp = () => {
         {/* Подтверждение пароля */}
         <div className="form-floating mb-3">
           <input
-            placeholder={t("signUpConfirmPassword")}
+            placeholder={t('signUpConfirmPassword')}
             id="signup-confirm-password"
             className={`form-control ${
-              formik.touched.userConfirmPassword 
-              &&
+              formik.touched.userConfirmPassword &&
               formik.errors.userConfirmPassword
-                ? "is-invalid"
-                : ""
+                ? 'is-invalid'
+                : ''
             }`}
             type="password"
             name="userConfirmPassword"
@@ -140,7 +139,7 @@ const SignUp = () => {
             onBlur={formik.handleBlur}
           />
           <label htmlFor="signup-confirm-password" className="form-label">
-            {t("signUpConfirmPassword")}
+            {t('signUpConfirmPassword')}
           </label>
           {formik.touched.userConfirmPassword &&
             formik.errors.userConfirmPassword && (
@@ -156,9 +155,9 @@ const SignUp = () => {
           disabled={formik.isSubmitting}
         >
           {formik.isSubmitting ? (
-            <Spinner style={{ width: "15px", hight: "15px" }} />
+            <Spinner style={{ width: '15px', hight: '15px' }} />
           ) : (
-            t("signUpRegistrationBtn")
+            t('signUpRegistrationBtn')
           )}
         </button>
       </form>
