@@ -96,9 +96,11 @@ const ModalCreatingChannel = ({
       </Modal.Header>
       <Modal.Body>
         <form className="mb-3" onSubmit={formik.handleSubmit}>
+          {/* eslint-disable  jsx-a11y/label-has-associated-control */}
           <label className="visually-hidden" htmlFor="name" id="name">
             Имя канала
           </label>
+          {/* eslint-enable  jsx-a11y/label-has-associated-control */}
           <input
             ref={inputRef}
             type="text"
@@ -107,7 +109,7 @@ const ModalCreatingChannel = ({
             name="name"
             onChange={formik.handleChange}
             value={formik.values.name}
-            aria-label='name'
+            aria-label="name"
           />
           <span className="bg-warning">
             {formik.errors.name ? formik.errors.name : null}

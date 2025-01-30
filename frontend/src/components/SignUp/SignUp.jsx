@@ -119,7 +119,7 @@ const SignUp = () => {
           && formik.errors.userPassword
             && (
             <div className="invalid-feedback">{formik.errors.userPassword}</div>
-          )}
+            )}
         </div>
 
         {/* Подтверждение пароля */}
@@ -128,8 +128,9 @@ const SignUp = () => {
             placeholder={t('signUpConfirmPassword')}
             id="signup-confirm-password"
             className={`form-control ${
-              formik.touched.userConfirmPassword &&
-              formik.errors.userConfirmPassword
+              formik.touched.userConfirmPassword 
+              &&
+                formik.errors.userConfirmPassword
                 ? 'is-invalid'
                 : ''
             }`}
@@ -149,7 +150,7 @@ const SignUp = () => {
             <div className="invalid-feedback">
               {formik.errors.userConfirmPassword}
             </div>
-          )}
+            )}
         </div>
 
         <button
