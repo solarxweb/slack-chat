@@ -16,20 +16,20 @@ const Header = () => {
   };
   // Вместо title, используем строку как ключ
   return (
-      <div className="header__container">
-        <div className="header__title">
-          <a href={link} className="title">
-            {t("title")}
-          </a>
-        </div>
-        <div className="header__btn-logout">
-          {token ? (
-            <button className="btn btn-primary" type="button" onClick={logout}>
-              {t("logout")}
-            </button>
-          ) : null}
-        </div>
+    <div className="header__container">
+      <div className="header__title">
+        <a href={link} className="title">
+          {t("title")}
+        </a>
       </div>
+      <div className="header__btn-logout">
+        {token ? (
+          <button className="btn btn-primary" type="button" onClick={logout}>
+            {t("logout")}
+          </button>
+        ) : null}
+      </div>
+    </div>
   );
 };
 

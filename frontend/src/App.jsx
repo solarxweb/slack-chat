@@ -21,22 +21,22 @@ import LoginForm from "./components/LoginForm/LoginForm.jsx";
 // };
 
 const App = () => (
-    <BrowserRouter>
-      <I18nextProvider i18n={i18nextInstance}>
-        <ReduxProvider store={store}>
-          <Header />
-          <div className="main__container">
-            <ToastContainer />
-            <Routes>
-              <Route path="/signup" element={<SignUp />} />
-              <Route path="/login" element={<LoginForm />} />
-              <Route path="/" element={<Channels />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </div>
-        </ReduxProvider>
-      </I18nextProvider>
-    </BrowserRouter>
+  <BrowserRouter>
+    <I18nextProvider i18n={i18nextInstance}>
+      <ReduxProvider store={store}>
+        <Header />
+        <div className="main__container">
+          <ToastContainer />
+          <Routes>
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/login" element={<LoginForm />} />
+            <Route path="/" element={<Channels />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </div>
+      </ReduxProvider>
+    </I18nextProvider>
+  </BrowserRouter>
 );
 
 export default App;

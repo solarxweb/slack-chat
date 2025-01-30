@@ -74,12 +74,12 @@ const SwitchNameChannel = ({ show, onHide, id }) => {
       </Modal.Header>
       <Modal.Body>
         <form className="mb-3" onSubmit={formik.handleSubmit}>
-        {/* eslint-disable jsx-a11y/label-has-associated-control */}
+          {/* eslint-disable jsx-a11y/label-has-associated-control */}
           <label className="visually-hidden" htmlFor="name">
             Имя канала
           </label>
-        {/* eslint-enable jsx-a11y/label-has-associated-control */}
-        {/* eslint-disable jsx-a11y/no-autofocus*/}
+          {/* eslint-enable jsx-a11y/label-has-associated-control */}
+          {/* eslint-disable jsx-a11y/no-autofocus */}
           <input
             type="text"
             className="form-control"
@@ -89,7 +89,7 @@ const SwitchNameChannel = ({ show, onHide, id }) => {
             value={formik.values.name}
             autoFocus
           />
-        {/* eslint-enable jsx-a11y/no-autofocus*/}
+          {/* eslint-enable jsx-a11y/no-autofocus */}
           <span className="bg-warning">
             {formik.errors.name ? formik.errors.name : null}
           </span>

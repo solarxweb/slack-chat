@@ -13,7 +13,7 @@ import leoProfanity from 'leo-profanity';
 import API_ROUTES from '../../../api';
 
 const ModalCreatingChannel = ({
-  show, onHide, createChannel, token 
+  show, onHide, createChannel, token,
 }) => {
   const { t } = useTranslation();
   const notifySuccess = () => toast.success(t('noticeChannelCreated'));
@@ -107,6 +107,7 @@ const ModalCreatingChannel = ({
             name="name"
             onChange={formik.handleChange}
             value={formik.values.name}
+            aria-label='name'
           />
           <span className="bg-warning">
             {formik.errors.name ? formik.errors.name : null}

@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-/* eslint-disable jsx-a11y/anchor-is-valid*/
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import { useState, useRef, useEffect } from 'react';
 import MakeSure from './MakeSureDelete.jsx';
 import SwitchNameChannel from './ChangeNameChannel.jsx';

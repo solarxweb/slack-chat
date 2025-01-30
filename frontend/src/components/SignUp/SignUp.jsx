@@ -115,8 +115,9 @@ const SignUp = () => {
           <label htmlFor="signup-password" className="form-label">
             {t('signUpPassword')}
           </label>
-          {formik.touched.userPassword && formik.errors.userPassword 
-          && (
+          {formik.touched.userPassword
+          && formik.errors.userPassword
+            && (
             <div className="invalid-feedback">{formik.errors.userPassword}</div>
           )}
         </div>
@@ -141,13 +142,13 @@ const SignUp = () => {
           <label htmlFor="signup-confirm-password" className="form-label">
             {t('signUpConfirmPassword')}
           </label>
-          {formik.touched.userConfirmPassword 
+          {formik.touched.userConfirmPassword
           &&
             formik.errors.userConfirmPassword
             && (
-              <div className="invalid-feedback">
-                {formik.errors.userConfirmPassword}
-              </div>
+            <div className="invalid-feedback">
+              {formik.errors.userConfirmPassword}
+            </div>
           )}
         </div>
 

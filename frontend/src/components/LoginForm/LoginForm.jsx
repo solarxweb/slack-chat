@@ -6,10 +6,10 @@ import { toast } from 'react-toastify';
 import './LoginForm.css';
 import { Spinner } from 'react-bootstrap';
 import axios from 'axios';
-import API_ROUTES from '../../api';
 import * as yup from 'yup';
-import { setUserData } from '../../store/authSlice';
 import { useFormik } from 'formik';
+import API_ROUTES from '../../api';
+import { setUserData } from '../../store/authSlice';
 
 const LoginForm = () => {
   const { t } = useTranslation();
@@ -90,7 +90,7 @@ const LoginForm = () => {
             <label className="label-form" htmlFor="password">
               {t('loginPassword')}
             </label>
-            {authError && <div className='error-message'>{t('errLogin')}</div>}
+            {authError && <div className="error-message">{t('errLogin')}</div>}
           </div>
           <button
             type="submit"

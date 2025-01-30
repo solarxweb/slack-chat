@@ -1,4 +1,4 @@
-/*eslint-disable react/self-closing-comp*/
+/* eslint-disable react/self-closing-comp */
 import './NotFound.css';
 
 const NotFound = () => (
