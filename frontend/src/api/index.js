@@ -1,6 +1,6 @@
 const BASE_URL = '/api/v1';
 
-export const API_ROUTES = {
+const API_ROUTES = {
   messages: {
     list: () => `${BASE_URL}/messages`,
     listByChannel: (id) => `${BASE_URL}/messages?channelId=${id}`,
@@ -13,3 +13,5 @@ export const API_ROUTES = {
   login: () => `${BASE_URL}/login`,
   signup: () => `${BASE_URL}/signup`,
 };
+
+export default API_ROUTES;

@@ -1,7 +1,4 @@
-import {
-  createSlice,
-  createEntityAdapter,
-} from '@reduxjs/toolkit';
+import { createSlice, createEntityAdapter } from "@reduxjs/toolkit";
 // import axios from 'axios';
 
 const messagesAdapter = createEntityAdapter();
@@ -11,7 +8,7 @@ const initialState = messagesAdapter.getInitialState({
 });
 
 const messagesSlice = createSlice({
-  name: 'messages',
+  name: "messages",
   initialState,
   reducers: {
     resetChatState: () => initialState,
@@ -22,6 +19,9 @@ const messagesSlice = createSlice({
   },
 });
 
-export const { resetChatState, addMessage, removeMessage } = messagesSlice.actions;
-export const selectors = messagesAdapter.getSelectors((state) => state.messages);
+export const { resetChatState, addMessage, removeMessage } =
+  messagesSlice.actions;
+export const selectors = messagesAdapter.getSelectors(
+  (state) => state.messages
+);
 export default messagesSlice.reducer;

@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
-import { useState, useRef, useEffect } from 'react';
-import MakeSure from './MakeSureDelete.jsx';
-import SwitchNameChannel from './ChangeNameChannel.jsx';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { useState, useRef, useEffect } from "react";
+import MakeSure from "./MakeSureDelete.jsx";
+import SwitchNameChannel from "./ChangeNameChannel.jsx";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const DropdownElement = ({ id }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -11,7 +11,7 @@ const DropdownElement = ({ id }) => {
   const [isEditorOpen, setIsEditorOpen] = useState(false);
 
   const toggleDropdown = () => {
-    setIsOpen(prev => !prev);
+    setIsOpen((prev) => !prev);
   };
 
   const handleRemoveClick = () => {
@@ -31,9 +31,9 @@ const DropdownElement = ({ id }) => {
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
 
@@ -41,22 +41,35 @@ const DropdownElement = ({ id }) => {
     <>
       <div ref={dropdownRef}>
         <button
-          className='flex-grow-0 dropdown-toggle dropdown-toggle-split btn'
-          type='button'
-          id='dropdownMenuButton'
+          className="flex-grow-0 dropdown-toggle dropdown-toggle-split btn"
+          type="button"
+          id="dropdownMenuButton"
           onClick={toggleDropdown}
           aria-expanded={isOpen}
         >
-          <span className='visually-hidden'>Управление каналом</span>
+          <span className="visually-hidden">Управление каналом</span>
         </button>
-        <ul className={`dropdown-menu ${isOpen ? 'show' : ''}`} aria-labelledby={id}>
+        <ul
+          className={`dropdown-menu ${isOpen ? "show" : ""}`}
+          aria-labelledby={id}
+        >
           <li>
-            <a className='dropdown-item' href='#' role='button' onClick={handleRemoveClick}>
+            <a
+              className="dropdown-item"
+              href="#"
+              role="button"
+              onClick={handleRemoveClick}
+            >
               Удалить
             </a>
           </li>
           <li>
-            <a className='dropdown-item' href='#' role='button' onClick={handleRenameClick}>
+            <a
+              className="dropdown-item"
+              href="#"
+              role="button"
+              onClick={handleRenameClick}
+            >
               Переименовать
             </a>
           </li>
@@ -64,20 +77,20 @@ const DropdownElement = ({ id }) => {
       </div>
 
       {/* Компонент MakeSure для подтверждения удаления */}
-      <MakeSure 
-        show={isConfirmationOpen} 
+      <MakeSure
+        show={isConfirmationOpen}
         onHide={() => {
-          console.log('Закрываюсь'); 
+          console.log("Закрываюсь");
           setIsConfirmationOpen(false);
         }}
         id={id}
       />
-      
+
       {/* Компонент SwitchNameChannel для переименования */}
       <SwitchNameChannel
         show={isEditorOpen}
         onHide={() => {
-          console.log('Закрываю редактор'); 
+          console.log("Закрываю редактор");
           setIsEditorOpen(false);
         }}
         id={id}
