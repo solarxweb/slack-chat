@@ -128,8 +128,8 @@ const SignUp = () => {
             placeholder={t('signUpConfirmPassword')}
             id="signup-confirm-password"
             className={`form-control ${
-              formik.touched.userConfirmPassword && formik.errors.userConfirmPassword 
-                ? 'is-invalid' 
+              formik.touched.userConfirmPassword && formik.errors.userConfirmPassword
+                ? 'is-invalid'
                 : ''
             }`}
             type="password"
@@ -147,7 +147,6 @@ const SignUp = () => {
             </div>
           )}
         </div>
-
         <button
           className="signup-btn btn btn-outline-primary"
           type="submit"
