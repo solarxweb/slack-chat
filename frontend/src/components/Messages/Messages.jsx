@@ -10,7 +10,7 @@ import {
   selectors as messageSelector,
 } from "../../store/messagesSlice";
 import socket from "../../socket";
-import { API_ROUTES } from "../../api";
+import API_ROUTES from "../../api";
 
 const Messages = () => {
   const { t } = useTranslation();

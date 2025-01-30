@@ -9,7 +9,7 @@ import axios from "axios";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import { updateChannelName } from "../../../store/channelSlice";
-import { API_ROUTES } from "../../../api";
+import API_ROUTES from "../../../api";
 import socket from "../../../socket";
 
 const SwitchNameChannel = ({ show, onHide, id }) => {
