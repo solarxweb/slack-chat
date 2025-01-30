@@ -23,7 +23,7 @@ export default {
     decline: 'Отменить',
     close: 'Закрыть',
     errRegistrationUsernameLength: 'От 3 до 20 символов',
-    errRegistrationAlreadyExist: 'Ошибка регистрации. Аккаунт с таким логином уже существует',
+    errRegistrationAlreadyExist: 'Такой пользователь уже существует',
     errRegistrationRequiredField: 'Обязательное поле',
     errRegistrationNotEnougthSymbs: 'Пароль должен сожержать минимум 6 символов',
     errRegistrationPasswordsDontMatch: 'Пароли должны совпадать',
