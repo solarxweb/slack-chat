@@ -22,7 +22,7 @@ const ModalCreatingChannel = ({ show, onHide, createChannel, token }) => {
 
   useEffect(() => {
     leoProfanity.loadDictionary("en");
-    // leoProfanity.loadDictionary('ru'); // 'ru' / 'fr' / 'en'
+    // leoProfanity.loadDictionary("ru"); // "ru" / "fr" / "en"
   }, []);
 
   const validationSchema = yup.object().shape({
