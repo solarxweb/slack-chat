@@ -8,7 +8,7 @@ import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { setUserData } from "../../store/authSlice";
-import { API_ROUTES } from "../../api";
+import API_ROUTES from "../../api";
 
 const SignUp = () => {
   const redir = useNavigate();
