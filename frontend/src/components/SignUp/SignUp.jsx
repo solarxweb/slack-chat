@@ -130,9 +130,9 @@ const SignUp = () => {
             className={`form-control ${
               formik.touched.userConfirmPassword 
               &&
-                formik.errors.userConfirmPassword
+                (formik.errors.userConfirmPassword
                 ? 'is-invalid'
-                : ''
+                : '')
             }`}
             type="password"
             name="userConfirmPassword"
