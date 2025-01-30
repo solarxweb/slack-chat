@@ -128,11 +128,10 @@ const SignUp = () => {
             placeholder={t('signUpConfirmPassword')}
             id="signup-confirm-password"
             className={`form-control ${
-              formik.touched.userConfirmPassword 
-              &&
+              formik.touched.userConfirmPassword &&
                 (formik.errors.userConfirmPassword
-                ? 'is-invalid'
-                : '')
+                  ? 'is-invalid'
+                  : '')
             }`}
             type="password"
             name="userConfirmPassword"
@@ -143,8 +142,7 @@ const SignUp = () => {
           <label htmlFor="signup-confirm-password" className="form-label">
             {t('signUpConfirmPassword')}
           </label>
-          {formik.touched.userConfirmPassword
-          &&
+          {formik.touched.userConfirmPassword &&
             formik.errors.userConfirmPassword
             && (
             <div className="invalid-feedback">
