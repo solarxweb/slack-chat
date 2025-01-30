@@ -176,6 +176,7 @@ export const LoginForm = () => {
           <div className="form-floating mb-3">
             {/* Поле имени пользователя */}
             <input
+              id='username'
               placeholder={t('loginName')}
               required
               className='input-field form-control'
@@ -191,6 +192,7 @@ export const LoginForm = () => {
           <div className="form-floating mb-3">
             {/* Поле пароля */}
             <input
+              id='password'
               placeholder={t('loginPassword')}
               required
               className='input-field form-control'
