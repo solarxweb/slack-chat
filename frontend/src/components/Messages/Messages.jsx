@@ -128,7 +128,7 @@ const Messages = () => {
           aria-label="Новое сообщение"
         />
         <button
-          type="button"
+          type="submit"
           className="btn btn-primary send-message__btn text-wrap myx-auto"
           onClick={handleSendMessage}
           disabled={!message || loading}
