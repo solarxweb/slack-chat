@@ -16,18 +16,17 @@ const SignUp = () => {
   const dispatch = useDispatch()
   const noticeError = () => toast.warning(t('errNetwork'));
 
-  // Исправлены ключи переводов для min и max
   const validationSchema = yup.object({
     userLogin: yup.string()
-      .min(3, t('errRegistrationUsernameLength')) // Изменено на errRegistrationUsernameMin
-      .max(20, t('errRegistrationUsernameLength')) // Изменено на errRegistrationUsernameMax
+      .min(3, t('errRegistrationUsernameLength'))
+      .max(20, t('errRegistrationUsernameLength'))
       .required(t('errRegistrationRequiredField')),
     userPassword: yup.string()
       .min(6, t('errRegistrationNotEnougthSymbs'))
       .required(t('errRegistrationRequiredField')),
     userConfirmPassword: yup.string()
       .required(t('errRegistrationRequiredField'))
-      .oneOf([yup.ref('userPassword')], t('errRegistrationPasswordsDontMatch')), // Убран null
+      .oneOf([yup.ref('userPassword')], t('errRegistrationPasswordsDontMatch')),
   });
 
   const formik = useFormik({
@@ -41,9 +40,9 @@ const SignUp = () => {
       try {
         const response = await axios.post(API_ROUTES.signup(), {
           username: values.userLogin,
-          password: values.userPassword, // Исправлено с userPassword на password (если требуется бэкендом)
+          password: values.userPassword,
         });
-        if (response.statusText === 'Created') { // Проверка на статус Created (201)
+        if (response.statusText === 'Created') {
           const { username, token } = response.data;
           localStorage.setItem('username', username);
           localStorage.setItem('token', token);
@@ -67,7 +66,7 @@ const SignUp = () => {
   return (
     <div className="signup-wrapper">
       <div className="signup-title">
-        <h3>{t('signUpTitle')}</h3> {/* Добавлен перевод для заголовка */}
+        <h3>{t('signUpTitle')}</h3>
       </div>
       <form onSubmit={formik.handleSubmit} className='signup-form'>
         {/* Поле логина */}

@@ -65,24 +65,18 @@ button.submit-btn:hover {
   color: #fff;
 }
 
-.auth-unregistred {
+.auth-unregistered {
   display: block;
   height: 40px;
   text-align: center;
   padding: 5px;
-  margin: 20px auto;
+  margin: 0 auto;
 }
 
 .error-message {
   display: block;
   background-color: rgb(231, 76, 76);
   margin: 10px auto;
-  border-radius: 4px;
-  padding: 4px;
-}
-
-.auth-error {
-  background-color: rgb(231, 76, 76);
   border-radius: 4px;
   padding: 4px;
 }

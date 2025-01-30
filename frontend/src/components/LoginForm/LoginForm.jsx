@@ -114,7 +114,7 @@ export const LoginForm = () => {
     </div>
   );
 };
- */} 
+ */}
 import './LoginForm.css';
 import { Spinner } from 'react-bootstrap';
 import { API_ROUTES } from '../../api';
@@ -137,8 +137,8 @@ export const LoginForm = () => {
   const [authError, setAuthError] = useState(false);
 
   const validationSchema = yup.object().shape({
-    username: yup.string().required(t('errRegistrationRequiredField')),
-    password: yup.string().required(t('errRegistrationRequiredField')),
+    username: yup.string().required(),
+    password: yup.string().required(),
   });
 
   const formik = useFormik({
@@ -154,12 +154,11 @@ export const LoginForm = () => {
         localStorage.setItem('username', user.username);
         localStorage.setItem('token', user.token);
         dispatch(setUserData(user));
-        redir('/'); // Перенаправляем после успешной авторизации
+        redir('/');
       } catch (error) {
         console.error('Login error:', error);
         if (error.response && error.response.status === 401) {
-          setAuthError(true);
-          formik.setErrors({ username: t('errLogin') }); // Установка ошибки, если учетные данные неверны
+          setAuthError(true)
         } else if (error.response && error.response.status === 500) {
           noticeError();
         }
@@ -179,7 +178,7 @@ export const LoginForm = () => {
             <input
               placeholder={t('loginName')}
               required
-              className={`input-field form-control ${formik.touched.username && formik.errors.username ? 'error' : ''}`}
+              className='input-field form-control'
               type="text"
               name="username"
               value={formik.values.username}
@@ -187,9 +186,6 @@ export const LoginForm = () => {
               onBlur={formik.handleBlur}
             />
             <label className="label-form" htmlFor="username">{t('loginName')}</label>
-            {formik.touched.username && formik.errors.username && (
-              <span className="error-message">{formik.errors.username}</span>
-            )}
           </div>
           
           <div className="form-floating mb-3">
@@ -197,7 +193,7 @@ export const LoginForm = () => {
             <input
               placeholder={t('loginPassword')}
               required
-              className={`input-field form-control ${formik.touched.password && formik.errors.password ? 'error' : ''}`}
+              className='input-field form-control'
               type="password"
               name="password"
               value={formik.values.password}
@@ -205,14 +201,8 @@ export const LoginForm = () => {
               onBlur={formik.handleBlur}
             />
             <label className="label-form" htmlFor="password">{t('loginPassword')}</label>
-            {formik.touched.password && formik.errors.password && (
-              <span className="error-message">{formik.errors.password}</span>
-            )}
+            {authError && <div className="error-message">{t('errLogin')}</div>}
           </div>
-
-          {/* Общая ошибка авторизации */}
-          {authError && <div className="auth-error">{t('errLogin')}</div>}
-
           <button type="submit" className="submit-btn" disabled={formik.isSubmitting}>
             {formik.isSubmitting ? <Spinner style={{ width: '15px', height: '15px'}}/> : t('enter')}
           </button>
