@@ -11,7 +11,7 @@ import { I18nextProvider } from 'react-i18next';
 import i18nextInstance from './i18n/init.js';
 import './App.css';
 import { ToastContainer } from 'react-toastify';
-import { Provider, ErrorBoundary } from '@rollbar/react';
+// import { Provider, ErrorBoundary } from '@rollbar/react';
 
 // const rollbarConfig = {
 //   accessToken: 'd4eca5f6516a4e849da459ee439f9279',
@@ -27,7 +27,7 @@ function App() {
           <I18nextProvider i18n={i18nextInstance}>
             <ReduxProvider store={store}>
               <Header />
-              <div className="main__container">
+              <div className='main__container'>
                 <ToastContainer />
                 <Routes>
                   <Route path='/signup' element={<SignUp />} />

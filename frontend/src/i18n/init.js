@@ -1,7 +1,7 @@
-import i18next from "i18next";
-import { initReactI18next } from "react-i18next";
+import i18next from 'i18next';
+import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
-import ru from "./resources/ru";
+import ru from './resources/ru';
 
 const i18nextInstance = i18next.createInstance();
 
@@ -9,7 +9,7 @@ i18nextInstance
   .use(initReactI18next)
   .use(LanguageDetector)
   .init({
-    resources: { 
+    resources: {
       ru,
     },
     fallbackLng: 'ru',

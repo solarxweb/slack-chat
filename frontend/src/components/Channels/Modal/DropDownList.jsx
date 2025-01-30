@@ -41,9 +41,9 @@ const DropdownElement = ({ id }) => {
     <>
       <div ref={dropdownRef}>
         <button
-          className="flex-grow-0 dropdown-toggle dropdown-toggle-split btn"
-          type="button"
-          id="dropdownMenuButton"
+          className='flex-grow-0 dropdown-toggle dropdown-toggle-split btn'
+          type='button'
+          id='dropdownMenuButton'
           onClick={toggleDropdown}
           aria-expanded={isOpen}
         >
@@ -51,12 +51,12 @@ const DropdownElement = ({ id }) => {
         </button>
         <ul className={`dropdown-menu ${isOpen ? 'show' : ''}`} aria-labelledby={id}>
           <li>
-            <a className="dropdown-item" href="#" role='button' onClick={handleRemoveClick}>
+            <a className='dropdown-item' href='#' role='button' onClick={handleRemoveClick}>
               Удалить
             </a>
           </li>
           <li>
-            <a className="dropdown-item" href="#" role='button' onClick={handleRenameClick}>
+            <a className='dropdown-item' href='#' role='button' onClick={handleRenameClick}>
               Переименовать
             </a>
           </li>

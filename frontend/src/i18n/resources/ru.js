@@ -1,5 +1,10 @@
 export default {
   translation: {
+    messageCounter: {
+      one_message: '{{ count }} сообщение',
+      few_messages: '{{ count }} сообщения',
+      many_messages: '{{ count }} сообщений'
+    },
     title: 'Hexlet Chat',
     enter: 'Войти',
     noAccount: 'Нет аккаунта?',
@@ -10,7 +15,7 @@ export default {
     signUpUsername: 'Имя пользователя',
     signUpPassword: 'Пароль',
     signUpConfirmPassword: 'Подтвердите пароль',
-    signUpRegistrationBtn: 'Зарегистрироваться', 
+    signUpRegistrationBtn: 'Зарегистрироваться',
     channels: 'Каналы',
     send: 'Отправить',
     remove: 'Удалить',
@@ -36,6 +41,5 @@ export default {
     noticeChannelRemoved: 'Канал удалён',
     noticeChannelCreated: 'Канал создан',
     noticeChannelRenamed: 'Канал переименован',
-  }
-}
-
+  },
+};

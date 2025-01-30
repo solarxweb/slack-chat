@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const authSlice = createSlice({
   name: 'auth',
@@ -11,12 +11,12 @@ const authSlice = createSlice({
       const { token, username } = payload;
       state.token = token;
       state.username = username;
-      console.log(state)
+      console.log(state);
     },
     clearUserData: (state) => {
       state.username = null;
       state.token = null;
-    }
+    },
   },
 });
 
