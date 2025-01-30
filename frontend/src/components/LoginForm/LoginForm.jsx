@@ -37,7 +37,7 @@ export const LoginForm = () => {
         localStorage.setItem('username', user.username);
         localStorage.setItem('token', user.token);
         dispatch(setUserData(user));
-        formik.isValid ? redir('/') : formik.setError('username', t('errLogin'));
+        formik.isValid ? redir('/') : formik.setErrors({'username', t('errLogin')});
       } catch (error) {
         console.error('Login error:', error);
         if (error.status === 401) {
