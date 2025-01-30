@@ -19,8 +19,7 @@ const messagesSlice = createSlice({
   },
 });
 
-export const { resetChatState, addMessage, removeMessage } =
-  messagesSlice.actions;
+export const { resetChatState, addMessage, removeMessage } = messagesSlice.actions;
 export const selectors = messagesAdapter.getSelectors(
   (state) => state.messages
 );
