@@ -1,3 +1,4 @@
+/* eslint-disable quotes */
 import { useNavigate } from "react-router-dom";
 import "./Header.css";
 import { useTranslation } from "react-i18next";

@@ -1,5 +1,5 @@
+/* eslint-disable quotes */
 import { createSlice, createEntityAdapter } from '@reduxjs/toolkit';
-// import axios from 'axios';
 
 const messagesAdapter = createEntityAdapter();
 const initialState = messagesAdapter.getInitialState({

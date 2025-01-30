@@ -1,3 +1,4 @@
+/* eslint-disable quotes */
 import { configureStore } from '@reduxjs/toolkit';
 import authReducer from './authSlice';
 import messagesReducer from './messagesSlice';

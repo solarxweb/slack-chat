@@ -1,3 +1,4 @@
+/* eslint-disable quotes */
 import { createSlice } from '@reduxjs/toolkit';
 
 const authSlice = createSlice({

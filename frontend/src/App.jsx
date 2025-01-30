@@ -1,3 +1,4 @@
+/* eslint-disable quotes */
 import LoginForm from "./components/LoginForm/LoginForm.jsx";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Header from "./components/Header/Header.jsx";
