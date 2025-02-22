@@ -41,13 +41,15 @@ const MakeSureDelete = ({ id }) => {
       .then((response) => {
         if (response.status === 200) notifySuccess();
       })
-        .catch((error) => {
-          const handleErrCode = () => {
+      .catch((error) => {
+        const handleErrCode = () => {
           switch (error.status) {
             case 401:
               notifyPermError();
+              break;
             case 500:
               notifyNetError();
+              break;
             default:
               throw new Error('unexpected status');
           }
