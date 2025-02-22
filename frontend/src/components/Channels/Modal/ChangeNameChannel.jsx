@@ -28,13 +28,13 @@ const SwitchChannelName = ({ id }) => {
   const currentChannel = Object.values(entities).find((channel) => channel.id === id);
 
   useEffect(() => {
-      socket.on('renameChannel', (payload) => {
-        dispatch(updateChannelName(payload));
-      });
-  
-      return () => {
-        socket.off('renameChannel');
-      };
+    socket.on('renameChannel', (payload) => {
+      dispatch(updateChannelName(payload));
+    });
+
+    return () => {
+      socket.off('renameChannel');
+    };
   }, [dispatch]);
 
   const { name, id: curId } = currentChannel;
