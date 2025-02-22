@@ -4,6 +4,32 @@
 # Slack project ``simplified``
 ## [Project on Render.com](https://slackchat-project.onrender.com/)
 
+###  The project represents himself as a chat, that has basic features
+* autorization
+* login / logout
+* create / remove / rename channel
+* send message
 
-Project represent himself as chat where you can..(31.01 дописать)
+The project utilized ***React*** for the ***front-end framework***, with ***Vite*** serving as the ***build tool***.
+#### For install you need to clone this repo by
+```js
+git clone // <-- link
+```
+
+****Install dependencies**** / ****build project****
+```js
+make install // in root direcotry
+make build
+```
+****Start backend**** / ****start frontend****
+```js
+make start-backend // in root directory for start server
+cd frontend && make start-frontend
+```
+
+
+
+
+
+
 
