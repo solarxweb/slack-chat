@@ -17,7 +17,7 @@ const CreateChannel = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const notifySuccess = () => toast.success(t('noticeChannelCreated'));
-  const notifyError = () => toast.warning(t('errCreateChannelNetwork'));
+  const notifyError = () => toast.warning(t('errNetwork'));
 
   const channelsList = useSelector((state) => state.channels.entities);
   const existingNames = Object.values(channelsList).map((el) => el.name);
