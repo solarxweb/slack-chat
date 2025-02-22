@@ -31,8 +31,8 @@ const CreateChannel = () => {
   const validationSchema = yup.object().shape({
     name: yup
     .string()
-    .min(3, t('errCreateChannelLength'))
-    .max(20, t('errCreateChannelLength'))
+    .min(3, t('errRegistrationUsernameLength'))
+    .max(20, t('errRegistrationUsernameLength'))
     .required(t('errCreateChannelEmpty'))
     .notOneOf(existingNames, t('errRenameChannelDouble')),
   });
