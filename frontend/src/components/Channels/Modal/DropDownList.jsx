@@ -12,10 +12,7 @@ const DropdownElement = ({ id }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch()
   const [isOpen, setIsOpen] = useState(false);
-  const { type } = useSelector((state) => state.modal)
   const dropdownRef = useRef(null);
-  const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
-  const [isEditorOpen, setIsEditorOpen] = useState(false);
 
   const toggleDropdown = () => {
     setIsOpen((prev) => !prev);
@@ -33,6 +30,15 @@ const DropdownElement = ({ id }) => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
+
+  const handleOpenRename = () => {
+    dispatch(setOpen({ type: 'rename', extra: id }))
+  };
+
+  const handleOpenRemove = () => {
+    dispatch(setOpen({ type: 'delete', extra: id }))
+  }
+
 
   return (
     <>
@@ -55,7 +61,7 @@ const DropdownElement = ({ id }) => {
               className="dropdown-item"
               href="#"
               role="button"
-              onClick={() => dispatch(setOpen({ type: 'remove' }))}
+              onClick={handleOpenRemove}
             >
               {t('remove')}
             </a>
@@ -65,33 +71,13 @@ const DropdownElement = ({ id }) => {
               className="dropdown-item"
               href="#"
               role="button"
-              onClick={() => dispatch(setOpen({ type: 'rename'}))}
+              onClick={handleOpenRename}
             >
               {t('submitRenameBtn')}
             </a>
           </li>
         </ul>
       </div>
-
-      {/* Компонент MakeSure для подтверждения удаления */}
-      <MakeSure
-        show={type === 'delete'}
-        onHide={() => {
-          console.log('Закрываюсь');
-          setIsConfirmationOpen(false);
-        }}
-        id={id}
-      />
-
-      {/* Компонент SwitchNameChannel для переименования */}
-      <SwitchNameChannel
-        show={type === 'rename'}
-        onHide={() => {
-          console.log('Закрываю редактор');
-          setIsEditorOpen(false);
-        }}
-        id={id}
-      />
     </>
   );
 };

@@ -12,7 +12,7 @@ import { Spinner } from 'react-bootstrap';
 const MakeSureDelete = ({ id }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-
+  
   const token = localStorage.getItem('token');
 
   const { type, isOpen } = useSelector((state) => state.modal);
@@ -61,7 +61,7 @@ const MakeSureDelete = ({ id }) => {
   };
 
   return (
-    <Modal centered show={isOpen && type === 'remove'} onHide={closeModal}>
+    <Modal centered show={isOpen && type === 'delete'} onHide={closeModal}>
       <Modal.Header closeButton>
         <Modal.Title>{t('removeHeader')}</Modal.Title>
       </Modal.Header>

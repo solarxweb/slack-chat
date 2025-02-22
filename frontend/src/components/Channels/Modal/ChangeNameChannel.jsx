@@ -21,7 +21,7 @@ const SwitchChannelName = ({ id }) => {
   const dispatch = useDispatch();
   const token = localStorage.getItem('token');
 
-  const { type, isOpen } = useSelector((state) => state.modal);
+  const { type, isOpen, extra } = useSelector((state) => state.modal);
   const entities = useSelector((state) => state.channels.entities);
   const existingNames = useSelector(selectExistingChannelNames);
   
@@ -90,18 +90,20 @@ const SwitchChannelName = ({ id }) => {
       </Modal.Header>
       <Modal.Body>
         <form className="mb-3" onSubmit={formik.handleSubmit}>
-          <label className="visually-hidden" htmlFor="name">
-            {t('channelName')}
-          </label>
+          {/* Убедитесь, что id является уникальным */}
           <input
             type="text"
             className="form-control"
-            id="name"
-            name="name"
+            id="name" // Это уникально
+            name="name" // Используйте name для управления Formik
             onChange={formik.handleChange}
             value={formik.values.name}
             autoFocus
           />
+          <label className="visually-hidden" htmlFor="name">
+            {t('channelName')}
+          </label>
+          {/* Измените label, чтобы он правильно работал */}
           {formik.errors.name && <span className="bg-warning">{formik.errors.name}</span>}
         </form>
       </Modal.Body>

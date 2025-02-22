@@ -6,17 +6,17 @@ import { useEffect } from 'react';
 
 
 const ModalContainer = () => {
-  const { type } = useSelector(state => state.modal);
+  const { type, extra } = useSelector(state => state.modal);
   useEffect(() => {
-    console.log('Modal type changed:', type);
+    console.log(`Modal type changed: ${type}\n Extra: ${extra}`);
   }, [type]);
 
   const renderModal = () => {
     switch (type) {
       case 'rename':
-        return <SwitchChannelName />;
+        return <SwitchChannelName id={extra}/>;
       case 'delete':
-        return <MakeSureDelete />;
+        return <MakeSureDelete id={extra}/>;
       case 'create':
         return <CreateChannel />;
       default:
