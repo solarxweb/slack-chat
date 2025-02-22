@@ -6,18 +6,15 @@ const modalSlice = createSlice({
   initialState: {
     isOpen: false,
     type: null,
-    channel: null,
   },
   reducers: {
     setOpen: (state, { payload }) => {
       state.type = payload.type;
       state.isOpen = true;
-      state.channel = payload.channel;
     },
     setClose: (state) => {
       state.type = null;
       state.isOpen = false;
-      state.channel = null;
     },
   },
 });

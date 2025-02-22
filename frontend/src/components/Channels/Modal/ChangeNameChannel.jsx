@@ -90,6 +90,9 @@ const SwitchChannelName = ({ id }) => {
       </Modal.Header>
       <Modal.Body>
         <form className="mb-3" onSubmit={formik.handleSubmit}>
+          <label className="visually-hidden" htmlFor="name">
+            {t('channelName')}
+          </label>
           <input
             type="text"
             className="form-control"
@@ -99,15 +102,12 @@ const SwitchChannelName = ({ id }) => {
             value={formik.values.name}
             autoFocus
           />
-          <label className="visually-hidden" htmlFor="name">
-            {t('channelName')}
-          </label>
           {formik.errors.name && <span className="bg-warning">{formik.errors.name}</span>}
         </form>
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={closeModal}>
-          {t('decline')}
+          {t('close')}
         </Button>
         <Button
           variant="primary"
@@ -115,8 +115,8 @@ const SwitchChannelName = ({ id }) => {
           onClick={formik.handleSubmit}
           disabled={formik.isSubmitting}
         >
-          {t('send')}
-          </Button>
+          {t('submitRenameBtn')}
+        </Button>
       </Modal.Footer>
     </Modal>
   );
