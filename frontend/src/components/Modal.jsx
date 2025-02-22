@@ -13,7 +13,7 @@ const ModalContainer = () => {
   const renderModal = () => {
     switch (type) {
       case 'rename':
-        return <SwitchChannelName id={extra}/>;
+        return <SwitchChannelName id={extra} />;
       case 'delete':
         return <MakeSureDelete id={extra} />;
       case 'create':
