@@ -14,30 +14,30 @@ import { setClose } from '../../../store/modalSlice';
 import { addChannel, setCurrentChannel } from '../../../store/channelSlice';
 
 const CreateChannel = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const { t } = useTranslation();
   const notifySuccess = () => toast.success(t('noticeChannelCreated'));
   const notifyError = () => toast.warning(t('errCreateChannelNetwork'));
-  
+
   const channelsList = useSelector((state) => state.channels.entities);
   const existingNames = Object.values(channelsList).map((el) => el.name);
   const inputRef = useRef(null);
-  const { type } = useSelector((state) => state.modal)
-  
+  const { type } = useSelector((state) => state.modal);
+
   useEffect(() => {
     leoProfanity.loadDictionary('en');
   }, []);
-  
+
   const validationSchema = yup.object().shape({
     name: yup
-    .string()
-    .min(3, t('errRegistrationUsernameLength'))
-    .max(20, t('errRegistrationUsernameLength'))
-    .required(t('errCreateChannelEmpty'))
-    .notOneOf(existingNames, t('errRenameChannelDouble')),
+      .string()
+      .min(3, t('errRegistrationUsernameLength'))
+      .max(20, t('errRegistrationUsernameLength'))
+      .required(t('errCreateChannelEmpty'))
+      .notOneOf(existingNames, t('errRenameChannelDouble')),
   });
   const token = localStorage.getItem('token');
-  
+
   const formik = useFormik({
     initialValues: { name: '' },
     validationSchema,
@@ -59,14 +59,14 @@ const CreateChannel = () => {
         );
         dispatch(addChannel(response.data));
         dispatch(setCurrentChannel(response.data.id));
-        formik.resetForm(); 
+        formik.resetForm();
         notifySuccess();
       } catch (error) {
         console.warn(error.message);
         notifyError();
       } finally {
         setSubmitting(false);
-        dispatch(setClose())
+        dispatch(setClose());
       }
     },
   });

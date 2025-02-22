@@ -3,7 +3,7 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { useFormik } from 'formik';
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import * as yup from 'yup';
 import axios from 'axios';
 import { useTranslation } from 'react-i18next';
@@ -21,30 +21,32 @@ const SwitchChannelName = ({ id }) => {
   const dispatch = useDispatch();
   const token = localStorage.getItem('token');
 
-  const { type, isOpen, extra } = useSelector((state) => state.modal);
+  const { type, isOpen } = useSelector((state) => state.modal);
   const entities = useSelector((state) => state.channels.entities);
   const existingNames = useSelector(selectExistingChannelNames);
-  
+
   const currentChannel = Object.values(entities).find((channel) => channel.id === id);
-  
+
   if (!currentChannel) {
     return null;
-  }
+  };
 
   const { name, id: curId } = currentChannel;
-
-  const closeModal = () => {
-    dispatch(setClose());
-  };
 
   useEffect(() => {
     socket.on('renameChannel', (payload) => {
       dispatch(updateChannelName(payload));
     });
+
     return () => {
       socket.off('renameChannel');
     };
   }, [dispatch]);
+
+  const closeModal = () => {
+    dispatch(setClose());
+  };
+
 
   const validationSchema = yup.object().shape({
     name: yup
@@ -68,7 +70,7 @@ const SwitchChannelName = ({ id }) => {
           },
         })
         .then(() => {
-          dispatch(updateChannelName({ id: curId, name: values.name })); // Обновляем Redux с новыми данными
+          dispatch(updateChannelName({ id: curId, name: values.name }));
           notifySuccess();
         })
         .catch((error) => {
@@ -97,7 +99,6 @@ const SwitchChannelName = ({ id }) => {
             name="name"
             onChange={formik.handleChange}
             value={formik.values.name}
-            autoFocus
           />
           <label className="visually-hidden" htmlFor="name">
             {t('channelName')}

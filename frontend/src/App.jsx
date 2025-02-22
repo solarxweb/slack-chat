@@ -1,8 +1,10 @@
 /* eslint-disable quotes */
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Provider as ReduxProvider, useSelector } from "react-redux";
+import { Provider as ReduxProvider } from "react-redux";
 import { I18nextProvider } from "react-i18next";
 import { ToastContainer } from "react-toastify";
+import process from "process";
+import { Provider, ErrorBoundary } from "@rollbar/react";
 import Header from "./components/Header/Header.jsx";
 import SignUp from "./components/SignUp/SignUp.jsx";
 import NotFound from "./components/NotFound/NotFound.jsx";
@@ -12,8 +14,6 @@ import store from "./store/store.js";
 import i18nextInstance from "./i18n/init.js";
 import "./App.css";
 import LoginForm from "./components/LoginForm/LoginForm.jsx";
-import process from "process";
-import { Provider, ErrorBoundary } from "@rollbar/react";
 import ModalContainer from './components/Modal.jsx';
 
 const rollbarConfig = {
@@ -23,9 +23,7 @@ const rollbarConfig = {
   environment: "production",
 };
 
-const App = () => {
-
-  return (
+const App = () => (
   <Provider config={rollbarConfig}>
     <ErrorBoundary>
       <BrowserRouter>
@@ -47,7 +45,6 @@ const App = () => {
       </BrowserRouter>
     </ErrorBoundary>
   </Provider>
-  );
-};
+);
 
 export default App;

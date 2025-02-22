@@ -6,6 +6,7 @@ import axios from 'axios';
 import './Channels.css';
 import cn from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
+import { Spinner } from 'react-bootstrap';
 import Messages from '../Messages/Messages';
 import DropdownElement from './Modal/DropDownList.jsx';
 import {
@@ -15,10 +16,9 @@ import {
   removeChannel,
   selectors as channelSelectors,
 } from '../../store/channelSlice.js';
-import { setOpen } from '../../store/modalSlice.js'
+import { setOpen } from '../../store/modalSlice.js';
 import socket from '../../socket.js';
 import API_ROUTES from '../../api/index.js';
-import { Spinner } from 'react-bootstrap';
 
 const Channels = () => {
   const { t } = useTranslation();
@@ -26,9 +26,9 @@ const Channels = () => {
   const noticeError = () => toast(t('errNetwork'));
 
   const dispatch = useDispatch();
-  const [showLoading, setShowLoading] = useState(true)
-  
-  const currentId = useSelector((state) => state.channels.currentChannel)
+  const [showLoading, setShowLoading] = useState(true);
+
+  const currentId = useSelector((state) => state.channels.currentChannel);
   const channels = useSelector(channelSelectors.selectAll);
   const token = localStorage.getItem('token');
 
@@ -36,12 +36,12 @@ const Channels = () => {
 
   const scrollToLastChannelItem = () => {
     if (lastChannelItemRef.current) {
-      lastChannelItemRef.current.scrollIntoView({ behavior: 'smooth'});
+      lastChannelItemRef.current.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
   useEffect(() => {
-    scrollToLastChannelItem()
+    scrollToLastChannelItem();
   }, [channels]);
 
   useEffect(() => {
@@ -71,9 +71,7 @@ const Channels = () => {
     socket.on('newChannel', (payload) => {
       dispatch(addChannel(payload));
     });
-
-  }, [token]);
-
+  });
 
   const handlePickChannel = (channelId) => {
     dispatch(setCurrentChannel(channelId));
@@ -89,8 +87,8 @@ const Channels = () => {
           <span className="visually-hidden">Loading...</span>
         </Spinner>
       </div>
-      ) : (
-      <div className="chat-wrapper">
+    ) : (
+    <div className="chat-wrapper">
         <div className="chat-channels channels">
           <div className="channels-header header">
             <h3 className="channels-header__title">{t('channels')}</h3>

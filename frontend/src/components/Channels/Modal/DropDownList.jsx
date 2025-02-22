@@ -1,11 +1,9 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { useState, useRef, useEffect } from 'react';
-import MakeSure from './MakeSureDelete.jsx';
-import SwitchNameChannel from './ChangeNameChannel.jsx';
+import { useDispatch } from 'react-redux';
 import { setOpen } from '../../../store/modalSlice.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
 const DropdownElement = ({ id }) => {
@@ -32,16 +30,14 @@ const DropdownElement = ({ id }) => {
   }, []);
 
   const handleOpenRename = () => {
-    dispatch(setOpen({ type: 'rename', extra: id }))
+    dispatch(setOpen({ type: 'rename', extra: id }));
   };
 
   const handleOpenRemove = () => {
-    dispatch(setOpen({ type: 'delete', extra: id }))
-  }
-
+    dispatch(setOpen({ type: 'delete', extra: id }));
+  };
 
   return (
-    <>
       <div ref={dropdownRef}>
         <button
           className="flex-grow-0 dropdown-toggle dropdown-toggle-split btn"
@@ -78,7 +74,6 @@ const DropdownElement = ({ id }) => {
           </li>
         </ul>
       </div>
-    </>
   );
 };
 

@@ -47,9 +47,9 @@ const SignUp = () => {
         });
         const { token, username } = data;
         localStorage.setItem('username', username);
-        localStorage.setItem('token', token)
+        localStorage.setItem('token', token);
         dispatch(setUserData({ username, token }));
-        redir('/')
+        redir('/');
       } catch (error) {
         if (error.response?.status === 409) {
           formik.setFieldError('userLogin', t('errRegistrationAlreadyExist'));

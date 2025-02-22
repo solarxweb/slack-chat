@@ -5,9 +5,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
+import { Spinner } from 'react-bootstrap';
 import API_ROUTES from '../../../api';
 import { setClose } from '../../../store/modalSlice';
-import { Spinner } from 'react-bootstrap';
 
 const MakeSureDelete = ({ id }) => {
   const { t } = useTranslation();
@@ -35,29 +35,28 @@ const MakeSureDelete = ({ id }) => {
 
     axios.delete(API_ROUTES.channels.channelById(id), {
       headers: {
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${token}`,
       },
     })
-    .then((response) => {
-      if (response.status === 200) notifySuccess()
+      .then((response) => {
+        if (response.status === 200) notifySuccess();
     })
-    .catch((error) => {
-      const handleErrCode = () => {
+      .catch((error) => {
+        const handleErrCode = () => {
         switch (error.status) {
           case 401:
             return notifyPermError();
           case 500:
             return notifyNetError();
           default:
-            console.log(error.status);
             return;
-        }
-      }
-      handleErrCode(error)
-    })
-    .finally(() => {
-      closeModal()
-    })
+          }
+        };
+        handleErrCode(error);
+      })
+      .finally(() => {
+        closeModal();
+      });
   };
 
   return (
@@ -70,8 +69,8 @@ const MakeSureDelete = ({ id }) => {
         <Button variant="secondary" onClick={closeModal}>
           {t('decline')}
         </Button>
-        <Button 
-          variant="danger"  
+        <Button
+          variant="danger"
           disabled={loading}
           onClick={handleRemoveChannel}
         >
