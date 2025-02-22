@@ -88,8 +88,8 @@ const Channels = () => {
         </Spinner>
       </div>
     ) : (
-    <div className="chat-wrapper">
-        <div className="chat-channels channels">
+      <div className="chat-wrapper">
+      <div className="chat-channels channels">
           <div className="channels-header header">
             <h3 className="channels-header__title">{t('channels')}</h3>
             <button
@@ -128,10 +128,10 @@ const Channels = () => {
             ))}
           </ul>
         </div>
-        <Messages />
-      </div>
+      <Messages />
+    </div>
     )
   );
-}
+};
 
 export default Channels;

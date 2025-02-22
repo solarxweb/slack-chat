@@ -29,24 +29,13 @@ const SwitchChannelName = ({ id }) => {
 
   if (!currentChannel) {
     return null;
-  };
+  }
 
   const { name, id: curId } = currentChannel;
-
-  useEffect(() => {
-    socket.on('renameChannel', (payload) => {
-      dispatch(updateChannelName(payload));
-    });
-
-    return () => {
-      socket.off('renameChannel');
-    };
-  }, [dispatch]);
 
   const closeModal = () => {
     dispatch(setClose());
   };
-
 
   const validationSchema = yup.object().shape({
     name: yup
@@ -57,6 +46,16 @@ const SwitchChannelName = ({ id }) => {
       .notOneOf(existingNames, t('errRenameChannelDouble')),
   });
 
+  useEffect(() => {
+    socket.on('renameChannel', (payload) => {
+      dispatch(updateChannelName(payload));
+    });
+    
+    return () => {
+      socket.off('renameChannel');
+    };
+  }, [dispatch]);
+  
   const formik = useFormik({
     initialValues: {
       name,

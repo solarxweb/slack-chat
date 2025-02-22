@@ -12,7 +12,7 @@ import { setClose } from '../../../store/modalSlice';
 const MakeSureDelete = ({ id }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  
+
   const token = localStorage.getItem('token');
 
   const { type, isOpen } = useSelector((state) => state.modal);
@@ -24,7 +24,7 @@ const MakeSureDelete = ({ id }) => {
   const notifyPermError = () => toast.warning(t('noticeInsufficientPermissions'));
 
   const closeModal = () => {
-    setLoading(false)
+    setLoading(false);
     dispatch(setClose());
   };
 
@@ -40,16 +40,16 @@ const MakeSureDelete = ({ id }) => {
     })
       .then((response) => {
         if (response.status === 200) notifySuccess();
-    })
-      .catch((error) => {
-        const handleErrCode = () => {
-        switch (error.status) {
-          case 401:
-            return notifyPermError();
-          case 500:
-            return notifyNetError();
-          default:
-            return;
+      })
+        .catch((error) => {
+          const handleErrCode = () => {
+          switch (error.status) {
+            case 401:
+              return notifyPermError();
+            case 500:
+              return notifyNetError();
+            default:
+              return;
           }
         };
         handleErrCode(error);

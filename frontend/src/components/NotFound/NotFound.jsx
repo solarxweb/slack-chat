@@ -6,14 +6,14 @@ const NotFound = () => {
   const { t } = useTranslation();
   return (
     <>
-    <div className="oops-block">
+      <div className="oops-block">
       <h1 className="oops-title">
         <p>
           {t('notFound')}
         </p>
       </h1>
-    </div>
-    <div className="ribbon"></div>
+      </div>
+      <div className="ribbon"></div>
     </>
   );
 };

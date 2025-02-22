@@ -69,7 +69,7 @@ const Messages = () => {
       if (error.status === 500) noticeError();
     }
   };
-  
+
   useEffect(() => {
     leoProfanity.loadDictionary('ru');
   }, []);
@@ -98,15 +98,13 @@ const Messages = () => {
 
   const scrollToLastMsg = () => {
     if (lastMessageRef.current) {
-      lastMessageRef.current.scrollIntoView({ behavior: 'smooth'})
+      lastMessageRef.current.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
   useEffect(() => {
-    scrollToLastMsg()
-  }, [messages])
-  
-
+    scrollToLastMsg();
+  }, [messages]);
 
   const handleChange = (e) => setMessage(e.target.value);
 
