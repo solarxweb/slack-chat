@@ -107,7 +107,7 @@ const SwitchChannelName = ({ id }) => {
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={closeModal}>
-          {t('close')}
+          {t('decline')}
         </Button>
         <Button
           variant="primary"
@@ -115,7 +115,7 @@ const SwitchChannelName = ({ id }) => {
           onClick={formik.handleSubmit}
           disabled={formik.isSubmitting}
         >
-          {t('submitRenameBtn')}
+          {t('send')}
           </Button>
       </Modal.Footer>
     </Modal>
