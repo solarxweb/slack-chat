@@ -24,7 +24,7 @@ make build
 ****Start backend**** / ****start frontend****
 ```js
 make start-backend // in root directory for start server
-cd frontend && make start-frontend
+cd frontend && npm run dev
 ```
 
 
