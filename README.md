@@ -5,7 +5,7 @@
 #### [Project on Render.com](https://slackchat-project.onrender.com/)
 
 ###  The project represents himself as a chat, that has basic features
-* autorization
+* authorization
 * login / logout
 * create / remove / rename channel
 * send message
