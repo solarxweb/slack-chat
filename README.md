@@ -2,7 +2,7 @@
 [![Actions Status](https://github.com/solarxweb/frontend-project-12/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/solarxweb/frontend-project-12/actions)
 
 # Slack project ``simplified``
-## [Project on Render.com](https://slackchat-project.onrender.com/)
+#### [Project on Render.com](https://slackchat-project.onrender.com/)
 
 ###  The project represents himself as a chat, that has basic features
 * autorization
