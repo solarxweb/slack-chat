@@ -93,9 +93,9 @@ const Channels = () => {
           <div className="channels-header header">
             <h3 className="channels-header__title">{t('channels')}</h3>
             <button
-                type="button"
-                className="channels-create__btn"
-                onClick={() => dispatch(setOpen({ type: 'create' }))}
+              type="button"
+              className="channels-create__btn"
+              onClick={() => dispatch(setOpen({ type: 'create' }))}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
