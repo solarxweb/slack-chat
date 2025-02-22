@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "npm run build --prefix frontend",
-    "start": "npx start-server -s ./frontend/dist",
-    "postinstall": "cd frontend && npm ci"
+    "start": "npx start-server -s ./frontend/dist"
   },
   "keywords": [
     "chat",

@@ -1,11 +1,8 @@
 install:
-	npm ci && make -C frontend install
+	npm ci && cd frontend & npm ci
 
 build: 
 	npm run build
-
-start:
-	make start-backend
 
 start-backend:
 	npm run start
