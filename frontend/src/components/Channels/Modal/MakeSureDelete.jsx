@@ -45,11 +45,11 @@ const MakeSureDelete = ({ id }) => {
           const handleErrCode = () => {
           switch (error.status) {
             case 401:
-              return notifyPermError();
+              notifyPermError();
             case 500:
-              return notifyNetError();
+              notifyNetError();
             default:
-              return;
+              throw new Error('unexpected status');
           }
         };
         handleErrCode(error);

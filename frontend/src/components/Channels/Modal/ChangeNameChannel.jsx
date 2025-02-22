@@ -50,12 +50,12 @@ const SwitchChannelName = ({ id }) => {
     socket.on('renameChannel', (payload) => {
       dispatch(updateChannelName(payload));
     });
-    
+
     return () => {
       socket.off('renameChannel');
     };
   }, [dispatch]);
-  
+
   const formik = useFormik({
     initialValues: {
       name,
