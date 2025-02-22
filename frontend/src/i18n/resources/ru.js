@@ -21,6 +21,7 @@ export default {
     channels: 'Каналы',
     send: 'Отправить',
     remove: 'Удалить',
+    labelChannelControl: 'Управление каналом',
     renameHeader: 'Переименовать канал',
     createChannelHeader: 'Создать новый канал',
     submitCreateChannelBtn: 'Создать канал',

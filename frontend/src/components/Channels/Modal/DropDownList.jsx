@@ -50,7 +50,7 @@ const DropdownElement = ({ id }) => {
           onClick={toggleDropdown}
           aria-expanded={isOpen}
         >
-          <span className="visually-hidden">Управление каналом</span>
+          <span className="visually-hidden">{t('labelChannelControl')}</span>
         </button>
         <ul
           className={`dropdown-menu ${isOpen ? 'show' : ''}`}

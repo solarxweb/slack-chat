@@ -90,12 +90,11 @@ const SwitchChannelName = ({ id }) => {
       </Modal.Header>
       <Modal.Body>
         <form className="mb-3" onSubmit={formik.handleSubmit}>
-          {/* Убедитесь, что id является уникальным */}
           <input
             type="text"
             className="form-control"
-            id="name" // Это уникально
-            name="name" // Используйте name для управления Formik
+            id="name"
+            name="name"
             onChange={formik.handleChange}
             value={formik.values.name}
             autoFocus
@@ -103,7 +102,6 @@ const SwitchChannelName = ({ id }) => {
           <label className="visually-hidden" htmlFor="name">
             {t('channelName')}
           </label>
-          {/* Измените label, чтобы он правильно работал */}
           {formik.errors.name && <span className="bg-warning">{formik.errors.name}</span>}
         </form>
       </Modal.Body>

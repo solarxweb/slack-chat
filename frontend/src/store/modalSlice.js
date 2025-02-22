@@ -11,7 +11,6 @@ const modalSlice = createSlice({
   reducers: {
     setOpen: (state, { payload }) => {
       const { type, extra } = payload;
-      console.log(type, extra)
       state.type = type;
       state.isOpen = true;
       state.extra = extra;
