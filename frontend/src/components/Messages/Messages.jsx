@@ -31,6 +31,7 @@ const Messages = () => {
   );
 
   const inputRef = useRef(null);
+  const lastMessageRef = useRef(null);
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -68,7 +69,7 @@ const Messages = () => {
       if (error.status === 500) noticeError();
     }
   };
-
+  
   useEffect(() => {
     leoProfanity.loadDictionary('ru');
   }, []);
@@ -94,6 +95,18 @@ const Messages = () => {
       socket.off('newMessage', handleNewMessage);
     };
   }, [dispatch]);
+
+  const scrollToLastMsg = () => {
+    if (lastMessageRef.current) {
+      lastMessageRef.current.scrollIntoView({ behavior: 'smooth'})
+    }
+  };
+
+  useEffect(() => {
+    scrollToLastMsg()
+  }, [messages])
+  
+
 
   const handleChange = (e) => setMessage(e.target.value);
 
@@ -138,8 +151,8 @@ const Messages = () => {
         <div className="messages-header__counter">{messageCount}</div>
       </div>
       <div className="messages-box">
-        {currentMessages.map((msg) => (
-          <div key={msg.id} className="message">
+        {currentMessages.map((msg, index) => (
+          <div key={msg.id} className="message" ref={index === currentMessages.length - 1 ? lastMessageRef : null}>
             <b>
               {msg.username}
               :

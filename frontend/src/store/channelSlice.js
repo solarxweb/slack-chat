@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable quotes */
-import { createSlice, createEntityAdapter } from '@reduxjs/toolkit';
+import { createSelector, createSlice, createEntityAdapter } from '@reduxjs/toolkit';
 
 const channelsAdapter = createEntityAdapter();
 
@@ -48,6 +48,13 @@ export const {
 // Экспорт селекторов
 export const selectors = channelsAdapter.getSelectors(
   (state) => state.channels,
+);
+
+const selectChannelsEntities = (state) => state.channels.entities;
+
+export const selectExistingChannelNames = createSelector(
+  [selectChannelsEntities],
+  (channels) => Object.values(channels).map((channel) => channel.name),
 );
 
 export default channelSlice.reducer;

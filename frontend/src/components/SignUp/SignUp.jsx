@@ -41,17 +41,15 @@ const SignUp = () => {
     validationSchema,
     onSubmit: async (values, { setSubmitting }) => {
       try {
-        const response = await axios.post(API_ROUTES.signup(), {
+        const { data } = await axios.post(API_ROUTES.signup(), {
           username: values.userLogin,
           password: values.userPassword,
         });
-        if (response.statusText === 'Created') {
-          const { username, token } = response.data;
-          localStorage.setItem('username', username);
-          localStorage.setItem('token', token);
-          dispatch(setUserData({ username, token }));
-          redir('/');
-        }
+        const { token, username } = data;
+        localStorage.setItem('username', username);
+        localStorage.setItem('token', token)
+        dispatch(setUserData({ username, token }));
+        redir('/')
       } catch (error) {
         if (error.response?.status === 409) {
           formik.setFieldError('userLogin', t('errRegistrationAlreadyExist'));

@@ -8,7 +8,6 @@ const API_ROUTES = {
   channels: {
     list: () => `${BASE_URL}/channels`,
     channelById: (id) => `${BASE_URL}/channels/${id}`,
-
   },
   login: () => `${BASE_URL}/login`,
   signup: () => `${BASE_URL}/signup`,

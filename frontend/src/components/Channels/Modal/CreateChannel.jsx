@@ -1,6 +1,5 @@
-/* eslint-disable react/prop-types */
 import { useFormik } from 'formik';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import * as yup from 'yup';
 import axios from 'axios';
 import Modal from 'react-bootstrap/Modal';
@@ -11,96 +10,86 @@ import { useRef, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import leoProfanity from 'leo-profanity';
 import API_ROUTES from '../../../api';
+import { setClose } from '../../../store/modalSlice';
+import { addChannel, setCurrentChannel } from '../../../store/channelSlice';
 
-const ModalCreatingChannel = ({
-  show, onHide, createChannel, token,
-}) => {
+const CreateChannel = () => {
+  const dispatch = useDispatch()
   const { t } = useTranslation();
   const notifySuccess = () => toast.success(t('noticeChannelCreated'));
   const notifyError = () => toast.warning(t('errCreateChannelNetwork'));
+  
   const channelsList = useSelector((state) => state.channels.entities);
   const existingNames = Object.values(channelsList).map((el) => el.name);
   const inputRef = useRef(null);
-
+  const { type } = useSelector((state) => state.modal)
+  
   useEffect(() => {
     leoProfanity.loadDictionary('en');
-    // leoProfanity.loadDictionary('ru'); // 'ru' / 'fr' / 'en'
   }, []);
-
+  
   const validationSchema = yup.object().shape({
     name: yup
-      .string()
-      .min(3, t('errCreateChannelLength'))
-      .max(20, t('errCreateChannelLength'))
-      .required(t('errCreateChannelEmpty'))
-      .notOneOf(existingNames, t('errRenameChannelDouble')),
+    .string()
+    .min(3, t('errCreateChannelLength'))
+    .max(20, t('errCreateChannelLength'))
+    .required(t('errCreateChannelEmpty'))
+    .notOneOf(existingNames, t('errRenameChannelDouble')),
   });
-
+  const token = localStorage.getItem('token');
+  
   const formik = useFormik({
-    initialValues: {
-      name: '',
-    },
+    initialValues: { name: '' },
     validationSchema,
     onSubmit: async (values, { setSubmitting }) => {
       if (!token) return;
+
       const filteredName = leoProfanity.clean(values.name);
       const isProfane = filteredName !== values.name;
 
-      const channelNameToSend = isProfane
-        ? '*'.repeat(values.name.length)
-        : filteredName;
+      const channelNameToSend = isProfane ? '*'.repeat(values.name.length) : filteredName;
 
-      await axios
-        .post(
+      try {
+        const response = await axios.post(
           API_ROUTES.channels.list(),
           { name: channelNameToSend },
           {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
+            headers: { Authorization: `Bearer ${token}` },
           },
-        )
-        .then((response) => {
-          createChannel(response.data);
-          formik.resetForm();
-          onHide();
-          notifySuccess();
-        })
-        .catch((err) => {
-          console.warn(err.message);
-          notifyError();
-        })
-        .finally(() => {
-          setSubmitting(false);
-        });
+        );
+        dispatch(addChannel(response.data));
+        dispatch(setCurrentChannel(response.data.id));
+        formik.resetForm(); 
+        notifySuccess();
+      } catch (error) {
+        console.warn(error.message);
+        notifyError();
+      } finally {
+        setSubmitting(false);
+        dispatch(setClose())
+      }
     },
   });
 
   useEffect(() => {
-    if (show && inputRef.current) {
+    if (inputRef.current) {
       inputRef.current.focus();
     }
-  }, [show]);
+  }, []);
 
   const handleClose = () => {
     formik.resetForm();
-    onHide();
+    dispatch(setClose());
   };
 
   return (
-    <Modal show={show} onHide={handleClose}>
+    <Modal centered show={type === 'create'} onHide={() => dispatch(setClose())}>
       <Modal.Header closeButton>
         <Modal.Title>{t('createChannelHeader')}</Modal.Title>
-        {' '}
-        {/* Используйте локализацию */}
       </Modal.Header>
       <Modal.Body>
         <form className="mb-3" onSubmit={formik.handleSubmit}>
-          {/* eslint-disable  jsx-a11y/label-has-associated-control */}
-          <label className="visually-hidden" htmlFor="name" id="name">
-            Имя канала
-          </label>
-          {/* eslint-enable  jsx-a11y/label-has-associated-control */}
+          <label className="visually-hidden" htmlFor="name">{t('channelName')}</label>
           <input
             ref={inputRef}
             type="text"
@@ -111,9 +100,7 @@ const ModalCreatingChannel = ({
             value={formik.values.name}
             aria-label="name"
           />
-          <span className="bg-warning">
-            {formik.errors.name ? formik.errors.name : null}
-          </span>
+          {formik.errors.name ? <span className="bg-warning">{formik.errors.name}</span> : null}
         </form>
       </Modal.Body>
       <Modal.Footer>
@@ -123,9 +110,6 @@ const ModalCreatingChannel = ({
         <Button
           variant="primary"
           type="submit"
-          onKeyDown={(e) => {
-            if (e.key === 'Enter') formik.handleSubmit(e);
-          }}
           onClick={formik.handleSubmit}
           disabled={formik.isSubmitting}
         >
@@ -136,4 +120,4 @@ const ModalCreatingChannel = ({
   );
 };
 
-export default ModalCreatingChannel;
+export default CreateChannel;

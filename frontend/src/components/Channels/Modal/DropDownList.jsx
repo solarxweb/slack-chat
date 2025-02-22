@@ -3,26 +3,22 @@
 import { useState, useRef, useEffect } from 'react';
 import MakeSure from './MakeSureDelete.jsx';
 import SwitchNameChannel from './ChangeNameChannel.jsx';
+import { setOpen } from '../../../store/modalSlice.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 const DropdownElement = ({ id }) => {
+  const { t } = useTranslation();
+  const dispatch = useDispatch()
   const [isOpen, setIsOpen] = useState(false);
+  const { type } = useSelector((state) => state.modal)
   const dropdownRef = useRef(null);
   const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
   const [isEditorOpen, setIsEditorOpen] = useState(false);
 
   const toggleDropdown = () => {
     setIsOpen((prev) => !prev);
-  };
-
-  const handleRemoveClick = () => {
-    setIsOpen(false);
-    setIsConfirmationOpen(true);
-  };
-
-  const handleRenameClick = () => {
-    setIsOpen(false);
-    setIsEditorOpen(true);
   };
 
   useEffect(() => {
@@ -59,9 +55,9 @@ const DropdownElement = ({ id }) => {
               className="dropdown-item"
               href="#"
               role="button"
-              onClick={handleRemoveClick}
+              onClick={() => dispatch(setOpen({ type: 'remove' }))}
             >
-              Удалить
+              {t('remove')}
             </a>
           </li>
           <li>
@@ -69,9 +65,9 @@ const DropdownElement = ({ id }) => {
               className="dropdown-item"
               href="#"
               role="button"
-              onClick={handleRenameClick}
+              onClick={() => dispatch(setOpen({ type: 'rename'}))}
             >
-              Переименовать
+              {t('submitRenameBtn')}
             </a>
           </li>
         </ul>
@@ -79,7 +75,7 @@ const DropdownElement = ({ id }) => {
 
       {/* Компонент MakeSure для подтверждения удаления */}
       <MakeSure
-        show={isConfirmationOpen}
+        show={type === 'delete'}
         onHide={() => {
           console.log('Закрываюсь');
           setIsConfirmationOpen(false);
@@ -89,7 +85,7 @@ const DropdownElement = ({ id }) => {
 
       {/* Компонент SwitchNameChannel для переименования */}
       <SwitchNameChannel
-        show={isEditorOpen}
+        show={type === 'rename'}
         onHide={() => {
           console.log('Закрываю редактор');
           setIsEditorOpen(false);

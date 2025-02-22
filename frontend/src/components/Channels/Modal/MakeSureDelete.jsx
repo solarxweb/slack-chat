@@ -1,67 +1,85 @@
+import React, { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
-import { removeChannel, setCurrentChannel } from '../../../store/channelSlice';
-import socket from '../../../socket';
 import API_ROUTES from '../../../api';
+import { setClose } from '../../../store/modalSlice';
+import { Spinner } from 'react-bootstrap';
 
-// eslint-disable-next-line react/prop-types
-const MakeSure = ({ show, onHide, id }) => {
+const MakeSureDelete = ({ id }) => {
   const { t } = useTranslation();
-  const notifySuccess = () => toast.success(t('noticeChannelRemoved'));
-  const notifyError = () => toast.warning(t('errChannelRemoveNetwork'));
   const dispatch = useDispatch();
+
   const token = localStorage.getItem('token');
-  const currentChannelId = useSelector(
-    (state) => state.channels.currentChannel,
-  );
 
-  const handleRemoveChannel = async () => {
-    try {
-      const response = await axios.delete(
-        API_ROUTES.channels.channelById(currentChannelId),
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      );
+  const { type, isOpen } = useSelector((state) => state.modal);
 
-      if (response.statusText === 'OK') {
-        dispatch(removeChannel({ id }));
-        if (currentChannelId === id) {
-          dispatch(setCurrentChannel('1'));
+  const [loading, setLoading] = useState(false);
+
+  const notifySuccess = () => toast.success(t('noticeChannelRemoved'));
+  const notifyNetError = () => toast.warning(t('errChannelRemoveNetwork'));
+  const notifyPermError = () => toast.warning(t('noticeInsufficientPermissions'));
+
+  const closeModal = () => {
+    setLoading(false)
+    dispatch(setClose());
+  };
+
+  const handleRemoveChannel = () => {
+    if (!token) return;
+
+    setLoading(true);
+
+    axios.delete(API_ROUTES.channels.channelById(id), {
+      headers: {
+        Authorization: `Bearer ${token}`
+      },
+    })
+    .then((response) => {
+      if (response.status === 200) notifySuccess()
+    })
+    .catch((error) => {
+      const handleErrCode = () => {
+        switch (error.status) {
+          case 401:
+            return notifyPermError();
+          case 500:
+            return notifyNetError();
+          default:
+            console.log(error.status);
+            return;
         }
-        socket.on('removeChannel', { id });
-        notifySuccess();
-      } else {
-        console.error(`${t.errRemoveChannel} ${response.status}`);
       }
-    } catch (error) {
-      notifyError();
-      console.error(`${t.errRemoveChannel} -`, error);
-    }
+      handleErrCode(error)
+    })
+    .finally(() => {
+      closeModal()
+    })
   };
 
   return (
-    <Modal centered show={show} onHide={onHide}>
+    <Modal centered show={isOpen && type === 'remove'} onHide={closeModal}>
       <Modal.Header closeButton>
-        <Modal.Title>Подтверждение удаления</Modal.Title>
+        <Modal.Title>{t('removeHeader')}</Modal.Title>
       </Modal.Header>
-      <Modal.Body>Вы уверены, что хотите удалить этот канал?</Modal.Body>
+      <Modal.Body>{t('removeMakeSure')}</Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={onHide}>
-          Отмена
+        <Button variant="secondary" onClick={closeModal}>
+          {t('decline')}
         </Button>
-        <Button variant="danger" onClick={handleRemoveChannel}>
-          Удалить канал
+        <Button 
+          variant="danger"  
+          disabled={loading}
+          onClick={handleRemoveChannel}
+        >
+          {loading ? <Spinner as="span" animation="border" size="sm" /> : t('remove')}
         </Button>
       </Modal.Footer>
     </Modal>
   );
 };
 
-export default MakeSure;
+export default MakeSureDelete;
