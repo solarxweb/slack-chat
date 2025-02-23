@@ -1,7 +1,7 @@
 import './Messages.css';
 import axios from 'axios';
 import {
-  useEffect, useState, useRef, useMemo,
+  useEffect, useState, useRef, useMemo, useCallback,
 } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
@@ -54,8 +54,9 @@ const Messages = () => {
     return t(`messageCounter.${getEndOfMessage(count)}`, { count });
   }, [currentMessages, t]);
 
-  const loadMessages = async () => {
+  const loadMessages = useCallback(async () => {
     try {
+      setLoading(true);
       const { data } = await axios.get(
         API_ROUTES.messages.listByChannel(currentChannelId),
         {
@@ -65,10 +66,14 @@ const Messages = () => {
         },
       );
       data.forEach((msg) => dispatch(addMessage(msg)));
+      scrollToLastMsg();
     } catch (error) {
-      if (error.status === 500) noticeError();
+      if (error.response?.status === 500) noticeError();
+    } finally {
+      setLoading(false);
     }
-  };
+  }, [currentChannelId, token, dispatch]);
+
 
   useEffect(() => {
     leoProfanity.loadDictionary('ru');
@@ -82,12 +87,17 @@ const Messages = () => {
 
   useEffect(() => {
     loadMessages();
-  });
+  }, [loadMessages]);
 
   useEffect(() => {
-    const handleNewMessage = (payload) => {
-      dispatch(addMessage(payload));
-    };
+    const timer = setTimeout(scrollToLastMsg, 150);
+    return () => clearTimeout(timer);
+  }, [currentMessages]);
+
+  const handleNewMessage = (payload) => {
+    dispatch(addMessage(payload));
+  };
+  useEffect(() => {
 
     socket.on('newMessage', handleNewMessage);
 
@@ -98,13 +108,9 @@ const Messages = () => {
 
   const scrollToLastMsg = () => {
     if (lastMessageRef.current) {
-      lastMessageRef.current.scrollIntoView({ behavior: 'smooth' });
+      lastMessageRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' });
     }
   };
-
-  useEffect(() => {
-    scrollToLastMsg();
-  }, [messages]);
 
   const handleChange = (e) => setMessage(e.target.value);
 
@@ -126,8 +132,6 @@ const Messages = () => {
       });
 
       dispatch(addMessage(data));
-
-      socket.on('newMessage', data);
 
       setMessage('');
     } catch (error) {

@@ -12,12 +12,12 @@
 
 .messages-header {
   width: 100%;
-  height: 80px; /* Высота фиксирована */
+  height: 80px;
   background-color: rgba(157, 191, 195, 0.231);
   padding: 10px 15px;
   font-size: 16px;
   font-family: 'Onest', sans-serif;
-  flex: 0 0 auto; /* Оставляем для статичной высоты */
+  flex: 0 0 auto;
 }
 
 .messages-box {
@@ -33,13 +33,13 @@
   display: flex;
   align-items: center;
   width: 100%;
-  flex: 0 0 auto; /* Убедитесь, что текстблок занимает только необходимую высоту */
-  padding: 20px 15px 0; /* Корректируем отступы */
+  flex: 0 0 auto;
+  padding: 20px 15px 0;
 }
 
 .messages-textblock input {
-  width: 100%; /* Полная ширина текстового поля */
-  flex: 1; /* Позволяет полю занимать доступное пространство */
+  width: 100%;
+  flex: 1;
   margin-right: 10px;
   padding-left: 10px;
 }
