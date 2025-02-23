@@ -132,7 +132,7 @@ const Messages = () => {
       dispatch(addMessage(data));
       setMessage('');
     } catch (error) {
-      if (error.status === 500)
+      if (error.status === 500) toast.warning(t('errNetwork'));
     } finally {
       setLoading(false);
       inputRef.current.focus();
