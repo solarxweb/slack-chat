@@ -53,6 +53,12 @@ const Messages = () => {
     return t(`messageCounter.${getEndOfMessage(count)}`, { count });
   }, [currentMessages, t]);
 
+  const scrollToLastMsg = () => {
+    if (lastMessageRef.current) {
+      lastMessageRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    }
+  };
+
   const loadMessages = useCallback(async () => {
     try {
       setLoading(true);
@@ -67,7 +73,7 @@ const Messages = () => {
       data.forEach((msg) => dispatch(addMessage(msg)));
       scrollToLastMsg();
     } catch (error) {
-      if (error.response?.status === 500) noticeError();
+      if (error.response?.status === 500) toast.warning(t('errNetwork'));
     } finally {
       setLoading(false);
     }
@@ -104,12 +110,6 @@ const Messages = () => {
     };
   });
 
-  const scrollToLastMsg = () => {
-    if (lastMessageRef.current) {
-      lastMessageRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' });
-    }
-  };
-
   const handleChange = (e) => setMessage(e.target.value);
 
   const handleSendMessage = async () => {
@@ -130,10 +130,9 @@ const Messages = () => {
       });
 
       dispatch(addMessage(data));
-
       setMessage('');
     } catch (error) {
-      if (error.status === 500) toast.warning(t('errNetwork'));
+      if (error.status === 500)
     } finally {
       setLoading(false);
       inputRef.current.focus();
