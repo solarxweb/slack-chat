@@ -151,11 +151,8 @@ const Messages = () => {
       <div className="messages-box">
         {currentMessages.map((msg, index) => (
           <div key={msg.id} className="message" ref={index === currentMessages.length - 1 ? lastMessageRef : null}>
-            <b>
-              {msg.username}
-              :
-            </b>
-            {msg.body}
+             <b>{`${msg.username}:  `}</b>
+             {msg.body}
           </div>
         ))}
       </div>
