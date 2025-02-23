@@ -40,7 +40,7 @@ const LoginForm = () => {
         redir('/');
       } catch (error) {
         if (error.response?.status === 401) {
-          redir('/login')
+          redir('/login');
           setAuthError(true);
         } else if (error.response?.status === 500) {
           noticeError();
