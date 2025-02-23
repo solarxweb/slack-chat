@@ -39,10 +39,10 @@ const LoginForm = () => {
         dispatch(setUserData(user));
         redir('/');
       } catch (error) {
-        console.error('Login error:', error);
-        if (error.response && error.response.status === 401) {
+        if (error.response?.status === 401) {
+          redir('/login')
           setAuthError(true);
-        } else if (error.response && error.response.status === 500) {
+        } else if (error.response?.status === 500) {
           noticeError();
         }
       }
@@ -56,8 +56,7 @@ const LoginForm = () => {
           <div className="auth-title">
             <h1>{t('enter')}</h1>
           </div>
-          <div className="form-floating mb-3">
-            {/* Поле имени пользователя */}
+          <div className="form-floating">
             <input
               id="username"
               placeholder={t('loginName')}
@@ -67,15 +66,12 @@ const LoginForm = () => {
               name="username"
               value={formik.values.username}
               onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
             />
             <label className="label-form" htmlFor="username">
               {t('loginName')}
             </label>
           </div>
-
-          <div className="form-floating mb-3">
-            {/* Поле пароля */}
+          <div className="form-floating">
             <input
               id="password"
               placeholder={t('loginPassword')}
@@ -85,13 +81,12 @@ const LoginForm = () => {
               name="password"
               value={formik.values.password}
               onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
             />
             <label className="label-form" htmlFor="password">
               {t('loginPassword')}
             </label>
-            {authError && <div className="error-message">{t('errLogin')}</div>}
           </div>
+          {authError && <div className="error-message">{t('errLogin')}</div>}
           <button
             type="submit"
             className="submit-btn"

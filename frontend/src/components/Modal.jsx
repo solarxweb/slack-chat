@@ -6,9 +6,6 @@ import MakeSureDelete from './Channels/Modal/MakeSureDelete';
 
 const ModalContainer = () => {
   const { type, extra } = useSelector((state) => state.modal);
-  useEffect(() => {
-    console.log(`Modal type changed: ${type}\n Extra: ${extra}`);
-  }, [type, extra]);
 
   const renderModal = () => {
     switch (type) {

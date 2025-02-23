@@ -1,12 +1,11 @@
 .auth-wrapper {
 	display: flex;
 	flex-direction: column;
-	height: fit-content;
-	min-height: 200px;
-	max-width: 520px;
-	min-width: 200px;
-	width: 100%;
-	/* padding: 10px; */
+	max-width: 400px;
+  width: 100%;
+  height: 400px;
+	align-items: center;
+  justify-content: center;
 	background-color: #e7e7e7;
 	box-shadow: 20px 22px 55px -45px rgba(227, 227, 227, 1);
 	border-radius: 7px;
@@ -14,7 +13,7 @@
 
 .auth-fields {
 	display: flex;
-	width: 100%;
+  min-width: 100px;
 	flex-direction: column;
 	align-items: center;
 	padding: 10px 10px;
@@ -28,12 +27,10 @@ h1 {
 }
 
 .input-field {
-    max-width: 270px;
-    width: 100%;
-    border-radius: 4px;
-    padding: 5px 5px;
-    background-color: rgba(255, 255, 255, 0.871);
-    border: 1px solid rgb(150, 150, 150);
+  border-radius: 4px;
+  padding: 5px 5px;
+  background-color: rgba(255, 255, 255, 0.871);
+  border: 1px solid rgb(150, 150, 150);
 }
 
 label {
@@ -45,19 +42,19 @@ label {
 }
 
 .submit_btn-wrapper {
-	display: block;
 	margin: 10px 25%;
 }
 
 button.submit-btn {
+  display: block;
   font-family: 'Onest', sans-serif;
-  width: 100%;
-  max-width: 270px;
+  width: 212px;
+  min-width: 100px;
   height: 32px;
   background-color: rgb(236, 236, 255);
   border: 1px solid rgb(164, 164, 245);
   border-radius: 4px;
-  
+  margin: 0 auto;
 }
 
 button.submit-btn:hover {
@@ -75,8 +72,10 @@ button.submit-btn:hover {
 
 .error-message {
   display: block;
-  background-color: rgb(231, 76, 76);
+  font-size: 14px;
+  background-color: rgb(197, 91, 91);
+  color: #d9d9d9;
   margin: 10px auto;
   border-radius: 4px;
-  padding: 4px;
+  padding: 2px 6px;
 }
