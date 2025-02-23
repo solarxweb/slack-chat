@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import CreateChannel from './Channels/Modal/CreateChannel';
 import SwitchChannelName from './Channels/Modal/ChangeNameChannel';

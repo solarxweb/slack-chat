@@ -16,7 +16,6 @@ import API_ROUTES from '../../api';
 
 const Messages = () => {
   const { t } = useTranslation();
-  const noticeError = () => toast.warning(t('errSendMessageNetwork'));
   const dispatch = useDispatch();
 
   const token = localStorage.getItem('token');
@@ -74,7 +73,6 @@ const Messages = () => {
     }
   }, [currentChannelId, token, dispatch]);
 
-
   useEffect(() => {
     leoProfanity.loadDictionary('ru');
   }, []);
@@ -97,14 +95,14 @@ const Messages = () => {
   const handleNewMessage = (payload) => {
     dispatch(addMessage(payload));
   };
-  useEffect(() => {
 
+  useEffect(() => {
     socket.on('newMessage', handleNewMessage);
 
     return () => {
       socket.off('newMessage', handleNewMessage);
     };
-  }, [dispatch]);
+  });
 
   const scrollToLastMsg = () => {
     if (lastMessageRef.current) {
@@ -135,8 +133,7 @@ const Messages = () => {
 
       setMessage('');
     } catch (error) {
-      if (error.status === 500) noticeError();
-      console.warn(error.message);
+      if (error.status === 500) toast.warning(t('errNetwork'));
     } finally {
       setLoading(false);
       inputRef.current.focus();
